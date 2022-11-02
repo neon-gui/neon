@@ -23,8 +23,8 @@ neonContainer.paint = () => {
     window.neonPainter = neonContainer.getContext("2d");
     bgWidget.render(neonPainter);
     neonPainter.fillStyle = "black";
-    if (!!e) {
-        neonPainter.fillRect(e.clientX,e.clientY,30,30);
+    if (!!latestMouseEvent) {
+        neonPainter.fillRect(latestMouseEvent.clientX,latestMouseEvent.clientY,30,30);
     }
 }
 neonContainer.onmousemove = (e) => {
