@@ -4,7 +4,7 @@ window.NeonWidget = class {
 window.BackgroundWidget = class extends NeonWidget {
     render(painter) {
         painter.fillStyle = "red";
-        painter.fillRect(0,0,painter.width,painter.height);
+        painter.fillRect(0,0,painter.canvas.width,painter.canvas.height);
     }
 }
 window.neonContainer = document.createElement("canvas");
