@@ -8,11 +8,11 @@
                     "packageName":"neon@framework"
                 }
             ],
-            "src":"https://codelikecraze.github.io/XPKG/scripts/desktop.js"        
+            "src":"https://codelikecraze.github.io/neon/scripts/desktop.js"        
         },        
         "framework":{
             "dependencies":[],
-            "src":"https://codelikecraze.github.io/XPKG/scripts/framework.js"        
+            "src":"https://codelikecraze.github.io/neon/scripts/framework.js"        
         }
     }
 }
