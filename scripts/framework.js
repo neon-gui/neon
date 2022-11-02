@@ -3,7 +3,7 @@ window.NeonWidget = class {
 }
 window.BackgroundWidget = class extends NeonWidget {
     render(painter) {
-        painter.fillStyle = "red";
+        painter.fillStyle = `hsl(${(new Date().getTime() / 10) % 100},100%,50%)`;
         painter.fillRect(0,0,painter.canvas.width,painter.canvas.height);
     }
 }
