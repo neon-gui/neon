@@ -25,7 +25,8 @@ neonContainer.paint = () => {
     bgWidget.render(neonPainter);
     neonPainter.fillStyle = "black";
     if (!!latestMouseEvent) {
-        neonPainter.drawImage(neonImage("https://codelikecraze.github.io/neon/cursors/PointerCursor.png"),latestMouseEvent.clientX,latestMouseEvent.clientY,30,30);
+        var cursor = "https://codelikecraze.github.io/neon/cursors/PointerCursor.png";
+        neonPainter.drawImage(neonImage(cursor),latestMouseEvent.clientX,latestMouseEvent.clientY,30,30,neonImage(cursor).width,neonImage(cursor).height);
     }
 }
 function neonImage(src) {
