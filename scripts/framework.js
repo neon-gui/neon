@@ -17,6 +17,7 @@ neonContainer.style.width = "100vw";
 neonContainer.style.height = "100vh";
 neonContainer.style.zIndex = 99999999;
 neonContainer.style.cursor = "none";
+var neonImagePool = {};
 neonContainer.paint = () => {
     neonContainer.width = innerWidth;
     neonContainer.height = innerHeight;
@@ -24,8 +25,15 @@ neonContainer.paint = () => {
     bgWidget.render(neonPainter);
     neonPainter.fillStyle = "black";
     if (!!latestMouseEvent) {
-        neonPainter.fillRect(latestMouseEvent.clientX,latestMouseEvent.clientY,30,30);
+        neonPainter.drawImage(neonImage("https://codelikecraze.github.io/neon/cursors/PointerCursor.png"),latestMouseEvent.clientX,latestMouseEvent.clientY,30,30);
     }
+}
+function neonImage(src) {
+    if (!neonImagePool[src]) {
+        neonImagePool[src] = document.createElement("img");
+        neonImagePool[src].src = src;
+    }
+    return neonImagePool[src];
 }
 neonContainer.onmousemove = (e) => {
     latestMouseEvent = e;
