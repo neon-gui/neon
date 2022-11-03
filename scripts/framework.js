@@ -29,7 +29,7 @@ neonContainer.paint = () => {
         neonPainter.drawImage(neonImage(cursor),latestMouseEvent.clientX,latestMouseEvent.clientY,30,30,neonImage(cursor).width,neonImage(cursor).height);
     }
 }
-function neonImage(src) {
+window.neonImage = function(src) {
     if (!neonImagePool[src]) {
         neonImagePool[src] = document.createElement("img");
         neonImagePool[src].src = src;
