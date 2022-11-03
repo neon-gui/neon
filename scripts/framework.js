@@ -26,7 +26,7 @@ neonContainer.paint = () => {
     neonPainter.fillStyle = "black";
     if (!!latestMouseEvent) {
         var cursor = "https://codelikecraze.github.io/neon/cursors/PointerCursor.png";
-        neonPainter.drawImage(neonImage(cursor),latestMouseEvent.clientX,latestMouseEvent.clientY,20);
+        neonPainter.drawImage(neonImage(cursor),latestMouseEvent.clientX,latestMouseEvent.clientY,20,neonImage(cursor).height/neonImage(cursor).width*20);
     }
 }
 window.neonImage = function(src) {
