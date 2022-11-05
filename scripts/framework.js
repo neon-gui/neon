@@ -6,13 +6,20 @@ window.NeonWidget = class {
 }
 window.BackgroundWidget = class extends NeonWidget {
     render_internal(painter, options) {
-        painter.fillStyle = `hsl(${(new Date().getTime() / 10) % 360},100%,50%)`;
-        painter.fillRect(options.x, options.y, options.width, options.height);
+        var maximumSize = math.max(latestMouseEvent.clientX, latestMouseEvent.clientY, options.width - latestMouseEvent.clientX, options.height - latestMouseEvent.clientY)
+        for (var i = maximumSize; i > 0; i--) {
+            painter.fillStyle = `hsl(${((new Date().getTime() / 10) + i) % 360},100%,50%)`;
+            //painter.fillRect(options.x, options.y, options.width, options.height);    
+            painter.fillRect(latestMouseEvent.clientX - i, latestMouseEvent.clientY - i, i * 2, i * 2);
+        }
     }
 }
 window.neonContainer = document.createElement("canvas");
 window.bgWidget = new BackgroundWidget();
-window.latestMouseEvent = null;
+window.latestMouseEvent = new MouseEvent("mousemove", {
+    clientX: 0,
+    clientY: 0
+});
 neonContainer.style.position = "absolute";
 neonContainer.style.left = 0;
 neonContainer.style.top = 0;
@@ -32,10 +39,8 @@ neonContainer.paint = () => {
         height: painter.canvas.height
     });
     neonPainter.fillStyle = "black";
-    if (!!latestMouseEvent) {
-        var cursor = "https://codelikecraze.github.io/neon/cursors/PointerCursor.png";
-        neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
-    }
+    var cursor = "https://codelikecraze.github.io/neon/cursors/PointerCursor.png";
+    neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
 }
 window.neonImage = function (src) {
     if (!neonImagePool[src]) {
