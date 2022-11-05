@@ -11,7 +11,9 @@ window.BackgroundWidget = class extends NeonWidget {
         for (var i = maximumSize; i > 0; i-=5) {
             painter.fillStyle = `hsl(${((new Date().getTime() / 50) + (i/5)) % 360},100%,20%)`;
             //painter.fillRect(options.x, options.y, options.width, options.height);    
-            painter.fillRoundRect(latestMouseEvent.clientX - i, latestMouseEvent.clientY - i, i * 2, i * 2,i);
+            painter.beginPath();
+            painter.roundRect(latestMouseEvent.clientX - i, latestMouseEvent.clientY - i, i * 2, i * 2,i);
+            painter.fill();
         }
     }
 }
