@@ -1,8 +1,7 @@
 window.NeonWidget = class {
     render(painter, options) {
         var optionsClone = structuredClone(options);
-        console.log(optionsClone);
-        render_internal(painter, optionsClone);
+        this.render_internal(painter, optionsClone);
     }
 }
 window.BackgroundWidget = class extends NeonWidget {
