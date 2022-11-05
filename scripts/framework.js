@@ -1,3 +1,4 @@
+window.math = window.Math;
 window.NeonWidget = class {
     render(painter, options) {
         var optionsClone = structuredClone(options);
