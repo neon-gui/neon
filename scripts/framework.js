@@ -1,10 +1,13 @@
 window.NeonWidget = class {
-    
+    render(painter,options) {
+        var optionsClone = structuredClone(options);
+        render_internal(painter,optionsClone);
+    }
 }
 window.BackgroundWidget = class extends NeonWidget {
-    render(painter) {
+    render_internal(painter,options) {
         painter.fillStyle = `hsl(${(new Date().getTime() / 10) % 360},100%,50%)`;
-        painter.fillRect(0,0,painter.canvas.width,painter.canvas.height);
+        painter.fillRect(options.x,options.y,options.width,options.height);
     }
 }
 window.neonContainer = document.createElement("canvas");
@@ -22,7 +25,12 @@ neonContainer.paint = () => {
     neonContainer.width = innerWidth;
     neonContainer.height = innerHeight;
     window.neonPainter = neonContainer.getContext("2d");
-    bgWidget.render(neonPainter);
+    bgWidget.render(neonPainter,{
+        x:0,
+        y:0,
+        width:painter.canvas.width,
+        height:painter.canvas.height
+    });
     neonPainter.fillStyle = "black";
     if (!!latestMouseEvent) {
         var cursor = "https://codelikecraze.github.io/neon/cursors/PointerCursor.png";
