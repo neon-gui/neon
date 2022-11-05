@@ -35,8 +35,8 @@ neonContainer.paint = () => {
     bgWidget.render(neonPainter, {
         x: 0,
         y: 0,
-        width: painter.canvas.width,
-        height: painter.canvas.height
+        width: neonPainter.canvas.width,
+        height: neonPainter.canvas.height
     });
     neonPainter.fillStyle = "black";
     var cursor = "https://codelikecraze.github.io/neon/cursors/PointerCursor.png";
