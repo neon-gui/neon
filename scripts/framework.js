@@ -1,6 +1,7 @@
 window.NeonWidget = class {
     render(painter, options) {
         var optionsClone = structuredClone(options);
+        console.log(optionsClone);
         render_internal(painter, optionsClone);
     }
 }
