@@ -8,8 +8,8 @@ window.NeonWidget = class {
 window.BackgroundWidget = class extends NeonWidget {
     render_internal(painter, options) {
         var maximumSize = math.max(latestMouseEvent.clientX, latestMouseEvent.clientY, options.width - latestMouseEvent.clientX, options.height - latestMouseEvent.clientY)
-        for (var i = maximumSize; i > 0; i--) {
-            painter.fillStyle = `hsl(${((new Date().getTime() / 10) + i) % 360},100%,50%)`;
+        for (var i = maximumSize; i > 0; i-=15) {
+            painter.fillStyle = `hsl(${((new Date().getTime() / 10) + (i/5)) % 360},100%,50%)`;
             //painter.fillRect(options.x, options.y, options.width, options.height);    
             painter.fillRect(latestMouseEvent.clientX - i, latestMouseEvent.clientY - i, i * 2, i * 2);
         }
