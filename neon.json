@@ -1,18 +1,18 @@
 {
-    "name":"neon",
-    "packages":{
-        "desktop":{
-            "dependencies":[
-                {
-                    "repository":"https://codelikecraze.github.io/neon/neon.json",
-                    "packageName":"neon@framework"
-                }
-            ],
-            "src":"https://codelikecraze.github.io/neon/scripts/desktop.js"        
-        },        
-        "framework":{
-            "dependencies":[],
-            "src":"https://codelikecraze.github.io/neon/scripts/framework.js"        
+  "name": "neon",
+  "packages": {
+    "desktop": {
+      "dependencies": [
+        {
+          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "packageName": "neon@framework"
         }
+      ],
+      "src": "https://codelikecraze.github.io/neon/scripts/desktop.js"
+    },
+    "framework": {
+      "dependencies": [],
+      "src": "https://codelikecraze.github.io/neon/scripts/framework.js"
     }
+  }
 }
