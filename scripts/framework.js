@@ -17,6 +17,35 @@ window.BackgroundWidget = class extends NeonWidget {
         }
     }
 }
+
+window.Clock = class {
+    #lastTime;
+    #internalDeltaTime;
+    get deltaTime() {
+        return this.#internalDeltaTime;
+    }
+    tick() {
+        var currentTime = this.preciseTime();
+        if (!this.#lastTime) {
+            this.#lastTime = currentTime;
+        }
+        this.#internalDeltaTime = (currentTime - this.#lastTime) / 1000;
+        this.#lastTime = currentTime;
+    }
+    preciseTime() {
+        if (!!window.Temporal) {
+            return Temporal.Now.instant();
+        }
+        if (!!window.performance) {
+            return performance.now();
+        }
+        if (!!window.Date) {
+            return new Date().getTime();
+        }
+        throw new Error("Clock is not available in your browser.");
+    }
+}
+
 window.neonContainer = document.createElement("canvas");
 window.bgWidget = new BackgroundWidget();
 window.latestMouseEvent = new MouseEvent("mousemove", {
@@ -42,7 +71,7 @@ neonContainer.paint = () => {
         height: neonPainter.canvas.height
     });
     neonPainter.fillStyle = "black";
-    var cursor = "https://codelikecraze.github.io/neon/cursors/PointerCursor.png";
+    var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
     neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
 }
 window.neonImage = function (src) {
