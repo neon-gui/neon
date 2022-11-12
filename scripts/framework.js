@@ -3,9 +3,12 @@ window.Math.lerp = (a,b,t) => {
 }
 window.math = window.Math;
 window.NeonWidget = class {
-    previouslyClicked;
+    previouslyClicked = false;
     render(painter, options) {
+        var optionsClone = structuredClone(options);
+        optionsClone.isBeingHovered = currentlyHoveredNode == this;
         var isClicked = currentlyDraggedNode == this && neonMouseDown;
+        console.log(isClicked,currentlyDraggedNode);
         if (isClicked != this.previouslyClicked) {
             isClicked = this.previouslyClicked;
             if (isClicked) {
@@ -18,8 +21,6 @@ window.NeonWidget = class {
                 }   
             }
         }
-        var optionsClone = structuredClone(options);
-        optionsClone.isBeingHovered = currentlyHoveredNode == this;
         optionsClone.isBeingDragged = isClicked;
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
