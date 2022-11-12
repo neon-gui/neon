@@ -27,6 +27,7 @@ window.NeonButtonWidget = class extends NeonWidget {
         painter.textBaseline = "middle";
         painter.textAlign = "center";
         painter.font = "20px Comfortaa";
+        painter.fillStyle = "white";
         painter.fillText("Button",options.x+options.width/2, options.y+options.height/2);
     }
 }
