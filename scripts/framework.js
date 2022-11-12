@@ -80,7 +80,7 @@ neonContainer.paint = () => {
         width: neonPainter.canvas.width,
         height: neonPainter.canvas.height
     });
-    butotnWidget.render(neonPainter, {
+    buttonWidget.render(neonPainter, {
         x: 10,
         y: 10,
         width: 300,
