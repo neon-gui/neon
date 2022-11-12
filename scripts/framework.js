@@ -24,6 +24,10 @@ window.NeonButtonWidget = class extends NeonWidget {
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
+        painter.textBaseline = "middle";
+        painter.textAlign = "center";
+        painter.font = "20px Comfortaa";
+        painter.fillText("Button",options.x+options.width/2, options.y+options.height/2);
     }
 }
 
@@ -70,6 +74,9 @@ neonContainer.style.height = "100vh";
 neonContainer.style.zIndex = 99999999;
 neonContainer.style.cursor = "none";
 var neonImagePool = {};
+var comfortaaElement = document.createElement("style");
+comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
+document.body.appendChild(comfortaaElement);
 neonContainer.paint = () => {
     neonContainer.width = innerWidth;
     neonContainer.height = innerHeight;
