@@ -6,6 +6,10 @@ window.NeonWidget = class {
     render(painter, options) {
         var optionsClone = structuredClone(options);
         optionsClone.isBeingHovered = currentlyHoveredNode == this;
+        optionsClone.isBeingDragged = currentlyDraggedNode == this;
+        optionsClone.addEventAbsorber = (absorber) => {
+            neonAbsorbers.push(absorber);
+        }
         this.render_internal(painter, optionsClone);
     }
 }
@@ -29,10 +33,13 @@ window.NeonButtonWidget = class extends NeonWidget {
         this.clock.tick();
         var targetLightness = 1;
         if (options.isBeingHovered) {
+            targetLightness = 1.3;
+        }
+        if (options.isBeingDragged) {
             targetLightness = 0.8;
         }
         this.lightness = Math.lerp(this.lightness, targetLightness, this.clock.deltaTime*5);
-        painter.addEventAbsorber({
+        options.addEventAbsorber({
             x:options.x,
             y:options.y,
             width:options.width,
@@ -87,6 +94,12 @@ window.latestMouseEvent = new MouseEvent("mousemove", {
     clientX: 0,
     clientY: 0
 });
+window.onmousedown = () => {
+    neonMouseDown = true;
+}
+window.onmouseup = () => {
+    neonMouseDown = false;
+}
 neonContainer.style.position = "absolute";
 neonContainer.style.left = 0;
 neonContainer.style.top = 0;
@@ -98,6 +111,8 @@ var neonImagePool = {};
 var comfortaaElement = document.createElement("style");
 var neonAbsorbers = [];
 var currentlyHoveredNode;
+var currentlyDraggedNode;
+var neonMouseDown = false;
 comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
 document.body.appendChild(comfortaaElement);
 DOMRect.prototype.includes = function (point) {
@@ -108,9 +123,6 @@ neonContainer.paint = () => {
     neonContainer.width = innerWidth;
     neonContainer.height = innerHeight;
     window.neonPainter = neonContainer.getContext("2d");
-    neonPainter.addEventAbsorber = (absorber) => {
-        neonAbsorbers.push(absorber);
-    }
     bgWidget.render(neonPainter, {
         x: 0,
         y: 0,
@@ -132,6 +144,9 @@ neonContainer.paint = () => {
         if (new DOMRect(neonAbsorbers[i].x,neonAbsorbers[i].y,neonAbsorbers[i].width,neonAbsorbers[i].height).includes(inverselyTransformedPoint)) {
             currentlyHoveredNode = neonAbsorbers[i].node;
         }
+    }
+    if (!neonMouseDown) {
+        currentlyDraggedNode = currentlyHoveredNode;
     }
 }
 window.neonImage = function (src) {
