@@ -116,7 +116,7 @@ neonContainer.paint = () => {
     neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
     currentlyHoveredNode = null;
     for (var i in neonAbsorbers) {
-        var inverselyTransformedPoint = neonAbsorbers[i].transform.inverse().transformPoint(latestMouseEvent.clientX, latestMouseEvent.clientY);
+        var inverselyTransformedPoint = neonAbsorbers[i].transform.inverse().transformPoint(new DOMPoint(latestMouseEvent.clientX, latestMouseEvent.clientY));
         if (new DOMRect(neonAbsorbers[i].x,neonAbsorbers[i].y,neonAbsorbers[i].width,neonAbsorbers[i].height).includes(inverselyTransformedPoint)) {
             currentlyHoveredNode = neonAbsorbers[i].node;
         }
