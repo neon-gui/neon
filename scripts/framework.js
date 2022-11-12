@@ -5,7 +5,7 @@ window.NeonWidget = class {
         this.render_internal(painter, optionsClone);
     }
 }
-window.BackgroundWidget = class extends NeonWidget {
+window.NeonBackgroundWidget = class extends NeonWidget {
     render_internal(painter, options) {
         var maximumSize = math.max(latestMouseEvent.clientX, latestMouseEvent.clientY, options.width - latestMouseEvent.clientX, options.height - latestMouseEvent.clientY)*2;
         for (var i = maximumSize; i > 0; i-=50) {
@@ -15,6 +15,15 @@ window.BackgroundWidget = class extends NeonWidget {
             painter.roundRect(latestMouseEvent.clientX - i, latestMouseEvent.clientY - i, i * 2, i * 2,i);
             painter.fill();
         }
+    }
+}
+
+window.NeonButtonWidget = class extends NeonWidget {
+    render_internal(painter, options) {
+        painter.fillStyle = "rgb(32,128,255)";
+        painter.beginPath();
+        painter.roundRect(options.x, options.y, options.width, options.height,10);
+        painter.fill();
     }
 }
 
@@ -47,7 +56,8 @@ window.Clock = class {
 }
 
 window.neonContainer = document.createElement("canvas");
-window.bgWidget = new BackgroundWidget();
+window.bgWidget = new NeonBackgroundWidget();
+window.buttonWidget = new NeonButtonWidget();
 window.latestMouseEvent = new MouseEvent("mousemove", {
     clientX: 0,
     clientY: 0
@@ -69,6 +79,12 @@ neonContainer.paint = () => {
         y: 0,
         width: neonPainter.canvas.width,
         height: neonPainter.canvas.height
+    });
+    butotnWidget.render(neonPainter, {
+        x: 10,
+        y: 10,
+        width: 300,
+        height: 50
     });
     neonPainter.fillStyle = "black";
     var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
