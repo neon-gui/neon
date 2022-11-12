@@ -6,7 +6,7 @@ window.NeonWidget = class {
     render(painter, options) {
         var optionsClone = structuredClone(options);
         optionsClone.isBeingHovered = currentlyHoveredNode == this;
-        optionsClone.isBeingDragged = currentlyDraggedNode == this;
+        optionsClone.isBeingDragged = currentlyDraggedNode == this && neonMouseDown;
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
