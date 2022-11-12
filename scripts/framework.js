@@ -1,7 +1,11 @@
+window.Math.lerp = (a,b,t) => {
+    return a*(1-t) + b*t;
+}
 window.math = window.Math;
 window.NeonWidget = class {
     render(painter, options) {
         var optionsClone = structuredClone(options);
+        optionsClone.isBeingHovered = currentlyHoveredNode == this;
         this.render_internal(painter, optionsClone);
     }
 }
@@ -19,7 +23,15 @@ window.NeonBackgroundWidget = class extends NeonWidget {
 }
 
 window.NeonButtonWidget = class extends NeonWidget {
+    lightness = 1;
+    clock = new Clock();
     render_internal(painter, options) {
+        this.clock.tick();
+        var targetLightness = 1;
+        if (options.isBeingHovered) {
+            targetLightness = 0.9;
+        }
+        this.lightness = Math.lerp(this.lightness, targetLightness, this.clock.deltaTime*15);
         painter.addEventAbsorber({
             x:options.x,
             y:options.y,
@@ -28,7 +40,7 @@ window.NeonButtonWidget = class extends NeonWidget {
             transform:painter.getTransform(),
             node:this
         });
-        painter.fillStyle = "rgb(32,128,255)";
+        painter.fillStyle = `rgb(${32*this.lightness},${128*this.lightness},${255*this.lightness})`;
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
@@ -89,7 +101,6 @@ var currentlyHoveredNode;
 comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
 document.body.appendChild(comfortaaElement);
 DOMRect.prototype.includes = function (point) {
-    console.log(this, point, point.x > this.left, point.x < this.right, point.y > this.top, point.y < this.bottom);
     return point.x > this.left && point.x < this.right && point.y > this.top && point.y < this.bottom;
 };
 neonContainer.paint = () => {
@@ -118,12 +129,10 @@ neonContainer.paint = () => {
     currentlyHoveredNode = null;
     for (var i in neonAbsorbers) {
         var inverselyTransformedPoint = neonAbsorbers[i].transform.inverse().transformPoint(new DOMPoint(latestMouseEvent.clientX, latestMouseEvent.clientY));
-        console.log(inverselyTransformedPoint);
         if (new DOMRect(neonAbsorbers[i].x,neonAbsorbers[i].y,neonAbsorbers[i].width,neonAbsorbers[i].height).includes(inverselyTransformedPoint)) {
             currentlyHoveredNode = neonAbsorbers[i].node;
         }
     }
-    console.log(currentlyHoveredNode);
 }
 window.neonImage = function (src) {
     if (!neonImagePool[src]) {
