@@ -89,6 +89,7 @@ var currentlyHoveredNode;
 comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
 document.body.appendChild(comfortaaElement);
 DOMRect.prototype.includes = (point) => {
+    console.log(this, point, point.x > this.left, point.x < this.right, point.y > this.top, point.y < this.bottom);
     return point.x > this.left && point.x < this.right && point.y > this.top && point.y < this.bottom;
 }
 neonContainer.paint = () => {
