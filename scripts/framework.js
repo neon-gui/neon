@@ -29,9 +29,9 @@ window.NeonButtonWidget = class extends NeonWidget {
         this.clock.tick();
         var targetLightness = 1;
         if (options.isBeingHovered) {
-            targetLightness = 0.9;
+            targetLightness = 0.8;
         }
-        this.lightness = Math.lerp(this.lightness, targetLightness, this.clock.deltaTime*15);
+        this.lightness = Math.lerp(this.lightness, targetLightness, this.clock.deltaTime*5);
         painter.addEventAbsorber({
             x:options.x,
             y:options.y,
@@ -47,7 +47,7 @@ window.NeonButtonWidget = class extends NeonWidget {
         painter.textBaseline = "middle";
         painter.textAlign = "center";
         painter.font = "20px Comfortaa";
-        painter.fillStyle = "white";
+        painter.fillStyle = `rgb(${255*this.lightness},${255*this.lightness},${255*this.lightness})`;
         painter.fillText("button",options.x+options.width/2, options.y+options.height/2);
     }
 }
