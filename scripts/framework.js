@@ -92,13 +92,13 @@ DOMRect.prototype.includes = (point) => {
     return point.x > this.left && point.x < this.right && point.y > this.top && point.y < this.bottom;
 }
 neonContainer.paint = () => {
-    neonPainter.addEventAbsorber = (absorber) => {
-        neonAbsorbers.push(absorber);
-    }
     neonAbsorbers = [];
     neonContainer.width = innerWidth;
     neonContainer.height = innerHeight;
     window.neonPainter = neonContainer.getContext("2d");
+    neonPainter.addEventAbsorber = (absorber) => {
+        neonAbsorbers.push(absorber);
+    }
     bgWidget.render(neonPainter, {
         x: 0,
         y: 0,
