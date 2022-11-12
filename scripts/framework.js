@@ -20,6 +20,14 @@ window.NeonBackgroundWidget = class extends NeonWidget {
 
 window.NeonButtonWidget = class extends NeonWidget {
     render_internal(painter, options) {
+        painter.addEventAbsorber({
+            x:options.x,
+            y:options.y,
+            width:options.width,
+            height:options.height,
+            transform:painter.getTransform(),
+            node:this
+        });
         painter.fillStyle = "rgb(32,128,255)";
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
@@ -76,9 +84,18 @@ neonContainer.style.zIndex = 99999999;
 neonContainer.style.cursor = "none";
 var neonImagePool = {};
 var comfortaaElement = document.createElement("style");
+var neonAbsorbers = [];
+var currentlyHoveredNode;
 comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
 document.body.appendChild(comfortaaElement);
+DOMRect.prototype.includes = (point) => {
+    return point.x > this.left && point.x < this.right && point.y > this.top && point.y < this.bottom;
+}
 neonContainer.paint = () => {
+    neonPainter.addEventAbsorber = (absorber) => {
+        neonAbsorbers.push(absorber);
+    }
+    neonAbsorbers = [];
     neonContainer.width = innerWidth;
     neonContainer.height = innerHeight;
     window.neonPainter = neonContainer.getContext("2d");
@@ -97,6 +114,14 @@ neonContainer.paint = () => {
     neonPainter.fillStyle = "black";
     var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
     neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
+    currentlyHoveredNode = null;
+    for (var i in neonAbsorbers) {
+        var inverselyTransformedPoint = neonAbsorbers[i].transform.inverse().transformPoint(latestMouseEvent.clientX, latestMouseEvent.clientY);
+        if (new DOMRect(neonAbsorbers[i].x,neonAbsorbers[i].y,neonAbsorbers[i].width,neonAbsorbers[i].height).includes(inverselyTransformedPoint)) {
+            currentlyHoveredNode = neonAbsorbers[i].node;
+        }
+    }
+    console.log(currentlyHoveredNode);
 }
 window.neonImage = function (src) {
     if (!neonImagePool[src]) {
