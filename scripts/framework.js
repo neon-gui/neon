@@ -3,10 +3,24 @@ window.Math.lerp = (a,b,t) => {
 }
 window.math = window.Math;
 window.NeonWidget = class {
+    previouslyClicked;
     render(painter, options) {
+        var isClicked = currentlyDraggedNode == this && neonMouseDown;
+        if (isClicked != this.previouslyClicked) {
+            isClicked = this.previouslyClicked;
+            if (isClicked) {
+                if (!!this.onclick) {
+                    this.onclick();
+                }
+            } else {
+                if (!!this.onunclick) {
+                    this.onunclick();
+                }   
+            }
+        }
         var optionsClone = structuredClone(options);
         optionsClone.isBeingHovered = currentlyHoveredNode == this;
-        optionsClone.isBeingDragged = currentlyDraggedNode == this && neonMouseDown;
+        optionsClone.isBeingDragged = isClicked;
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
@@ -56,6 +70,9 @@ window.NeonButtonWidget = class extends NeonWidget {
         painter.font = "20px Comfortaa";
         painter.fillStyle = `rgb(${255*this.lightness},${255*this.lightness},${255*this.lightness})`;
         painter.fillText("button",options.x+options.width/2, options.y+options.height/2);
+    }
+    onclick() {
+        alert("yeehaw!");
     }
 }
 
