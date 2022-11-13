@@ -3,9 +3,9 @@ window.BadAppleWidget = class extends NeonWidget {
     isSetup = false;
     
     render_internal(painter,options) {
-        if (!isSetup) {
+        if (!this.isSetup) {
             this.playButton = new NeonButton();
-            isSetup = true;
+            this.isSetup = true;
             this.playButton.text = "Play";
             var badAppleUrl = "https://guidipolito.github.io/Bad_apple_JS/Badapplesmall.mp4";
             this.badApple = document.createElement("video");
