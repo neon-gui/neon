@@ -17,7 +17,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
         if (this.ticked) {
             targetTickProgress = 1;
         }
-        this.tickDisplay = Math.lerp(this.tickDisplay, targetTickProgress, this.clock.deltaTime*5);
+        this.tickDisplay = Math.lerp(this.tickDisplay, targetTickProgress, this.clock.deltaTime*15);
         options.addEventAbsorber({
             x:options.x,
             y:options.y,
@@ -38,7 +38,6 @@ window.NeonTickboxWidget = class extends NeonWidget {
         painter.drawImage(neonImage(image),options.x+options.width/2-tickSize/2, options.y+options.height/2-tickSize/2, tickSize, tickSize);
     }
     onclick() {
-        this.lightness = 8;
         this.ticked = !this.ticked;
     }
 }
