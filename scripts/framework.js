@@ -5,14 +5,12 @@ window.math = window.Math;
 window.NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
-        this.thisDetectionId = Math.random();
         var optionsClone = structuredClone(options);
-        optionsClone.isBeingHovered = !!currentlyHoveredNode && (currentlyHoveredNode.thisDetectionId == this.thisDetectionId);
-        var isClicked = !!currentlyDraggedNode && ((currentlyDraggedNode.thisDetectionId == this.thisDetectionId) && neonMouseDown);
-        console.log(currentlyDraggedNode,this);
-        //console.log(!!currentlyDraggedNode && (currentlyDraggedNode.thisDetectionId == this.thisDetectionId), neonMouseDown,isClicked,currentlyDraggedNode);
+        optionsClone.isBeingHovered = this == currentlyHoveredNode;
+        var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
             isClicked = this.previouslyClicked;
+            console.log(isClicked);
             if (isClicked) {
                 if (!!this.onclick) {
                     this.onclick();
@@ -23,7 +21,7 @@ window.NeonWidget = class {
                 }   
             }
         }
-        optionsClone.isBeingDragged = !!currentlyDraggedNode && (currentlyDraggedNode.thisDetectionId == this.thisDetectionId && neonMouseDown);
+        optionsClone.isBeingDragged = isClicked;
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
