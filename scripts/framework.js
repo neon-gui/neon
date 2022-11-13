@@ -44,6 +44,7 @@ window.NeonButtonWidget = class extends NeonWidget {
     lightness = 1;
     clock = new Clock();
     text = "button";
+    letterSpacing = 0;
     render_internal(painter, options) {
         this.clock.tick();
         var targetLightness = 1;
@@ -54,6 +55,11 @@ window.NeonButtonWidget = class extends NeonWidget {
             targetLightness = 0.8;
         }
         this.lightness = Math.lerp(this.lightness, targetLightness, this.clock.deltaTime*5);
+        var targetLetterSpacing = 0;
+        if (options.isBeingHovered) {
+            targetLetterSpacing = 10;
+        }
+        this.letterSpacing = Math.lerp(this.letterSpacing, targetLetterSpacing, this.clock.deltaTime*5);
         options.addEventAbsorber({
             x:options.x,
             y:options.y,
@@ -62,6 +68,7 @@ window.NeonButtonWidget = class extends NeonWidget {
             transform:painter.getTransform(),
             node:this
         });
+        painter.letterSpacing = this.letterSpacing;
         painter.fillStyle = `rgb(${32*this.lightness},${128*this.lightness},${255*this.lightness})`;
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
