@@ -13,7 +13,7 @@ window.BadAppleWidget = class extends NeonWidget {
             this.badAppleRenderer = document.createElement("canvas");
             this.badAppleRenderer.width = 150;
             this.badAppleRenderer.height = 112;
-            this.badAppleRendererContext = badAppleRenderer.getContext('2d');
+            this.badAppleRendererContext = this.badAppleRenderer.getContext('2d');
         }
 
         if (this.badApple.currentTime != 0) {
