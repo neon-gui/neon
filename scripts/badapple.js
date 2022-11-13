@@ -21,8 +21,13 @@ window.BadAppleWidget = class extends NeonWidget {
 
         if (this.badApple.currentTime != 0) {
             this.badAppleRendererContext.drawImage(this.badApple,0,0,this.badAppleRenderer.width,this.badAppleRenderer.height);
+            console.log(getPixel(0,0)); //99% chance of a memory leak KEKW
         } else {
             this.playButton.render(painter,options);
         }
+    }
+
+    getPixel(x,y) {
+        return this.badAppleRendererContext.getImageData(x,y,1,1).data[0];
     }
 }
