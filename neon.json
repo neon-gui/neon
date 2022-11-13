@@ -14,6 +14,10 @@
         {
           "repository": "https://codelikecraze.github.io/neon/neon.json",
           "packageName": "neon@background"
+        },
+        {
+          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "packageName": "neon@badapple"
         }
       ],
       "src": "https://codelikecraze.github.io/neon/scripts/desktop.js"
@@ -46,6 +50,10 @@
     "tickbox": {
       "dependencies": [],
       "src": "https://codelikecraze.github.io/neon/scripts/tickbox.js"
+    },
+    "badapple": {
+      "dependencies": [],
+      "src": "https://codelikecraze.github.io/neon/scripts/badapple.js"
     }
   }
 }

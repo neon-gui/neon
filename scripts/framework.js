@@ -86,6 +86,7 @@ xpkg.onloads.push(() => {
     window.currentlyHoveredNode = null;
     window.currentlyDraggedNode = null;
     window.neonMouseDown = false;
+    window.badApple = new BadAppleWidget();
     comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
     document.body.appendChild(comfortaaElement);
     DOMRect.prototype.includes = function (point) {
@@ -97,6 +98,13 @@ xpkg.onloads.push(() => {
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
+        badApple.render(neonPainter, {
+            x: 0,
+            y: 0,
+            width: neonPainter.canvas.width,
+            height: neonPainter.canvas.height
+        });
+        /*
         bgWidget.render(neonPainter, {
             x: 0,
             y: 0,
@@ -115,6 +123,7 @@ xpkg.onloads.push(() => {
             width: 50,
             height: 50
         });
+        */
         neonPainter.fillStyle = "black";
         var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
         neonPainter.resetTransform();
