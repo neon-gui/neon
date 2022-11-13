@@ -159,7 +159,7 @@ neonContainer.paint = () => {
         width: neonPainter.canvas.width,
         height: neonPainter.canvas.height
     });
-    neonPainter.transform(100,100);
+    neonPainter.translate(100,100);
     buttonWidget.render(neonPainter, {
         x: 10,
         y: 10,
