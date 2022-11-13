@@ -71,7 +71,7 @@ xpkg.onloads.push(() => {
     window.neonContainer = document.createElement("canvas");
     window.bgWidget = new NeonBackgroundWidget();
     window.buttonWidget = new NeonButtonWidget();
-    
+
     neonContainer.style.position = "absolute";
     neonContainer.style.left = 0;
     neonContainer.style.top = 0;
@@ -79,12 +79,12 @@ xpkg.onloads.push(() => {
     neonContainer.style.height = "100vh";
     neonContainer.style.zIndex = 99999999;
     neonContainer.style.cursor = "none";
-    var neonImagePool = {};
-    var comfortaaElement = document.createElement("style");
-    var neonAbsorbers = [];
-    var currentlyHoveredNode;
-    var currentlyDraggedNode;
-    var neonMouseDown = false;
+    window.neonImagePool = {};
+    window.comfortaaElement = document.createElement("style");
+    window.neonAbsorbers = [];
+    window.currentlyHoveredNode = null;
+    window.currentlyDraggedNode = null;
+    window.neonMouseDown = false;
     comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
     document.body.appendChild(comfortaaElement);
     DOMRect.prototype.includes = function (point) {
