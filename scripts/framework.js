@@ -9,7 +9,8 @@ window.NeonWidget = class {
         var optionsClone = structuredClone(options);
         optionsClone.isBeingHovered = !!currentlyHoveredNode && (currentlyHoveredNode.thisDetectionId == this.thisDetectionId);
         var isClicked = !!currentlyDraggedNode && ((currentlyDraggedNode.thisDetectionId == this.thisDetectionId) && neonMouseDown);
-        console.log(!!currentlyDraggedNode && (currentlyDraggedNode.thisDetectionId == this.thisDetectionId), neonMouseDown,isClicked,currentlyDraggedNode);
+        console.log(currentlyDraggedNode,this);
+        //console.log(!!currentlyDraggedNode && (currentlyDraggedNode.thisDetectionId == this.thisDetectionId), neonMouseDown,isClicked,currentlyDraggedNode);
         if (isClicked != this.previouslyClicked) {
             isClicked = this.previouslyClicked;
             if (isClicked) {
