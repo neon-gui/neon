@@ -108,12 +108,20 @@ xpkg.onloads.push(() => {
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
-        badApple.render(neonPainter, {
+        neonPainter.translate(10,10);
+        neonPainter.fillStyle = "gray";
+        neonPainter.fillRect(0,0,100,100);
+        var path = new Path2D();
+        path.rect(0,0,100,100);
+        neonPainter.clip(path);
+        neonPainter.fillStyle = "black";
+        neonPainter.fillRect(0,0,100,100);
+        /*badApple.render(neonPainter, {
             x: 0,
             y: 0,
             width: neonPainter.canvas.width,
             height: neonPainter.canvas.height
-        });
+        });*/
         /*
         bgWidget.render(neonPainter, {
             x: 0,
