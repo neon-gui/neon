@@ -21,7 +21,7 @@ window.BadAppleWidget = class extends NeonWidget {
 
         if (this.badApple.currentTime != 0) {
             this.badAppleRendererContext.drawImage(this.badApple,0,0,this.badAppleRenderer.width,this.badAppleRenderer.height);
-            console.log(getPixel(0,0)); //99% chance of a memory leak KEKW
+            console.log(this.getPixel(0,0)); //99% chance of a memory leak KEKW
         } else {
             this.playButton.render(painter,options);
         }
