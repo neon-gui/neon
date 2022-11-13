@@ -112,8 +112,8 @@ xpkg.onloads.push(() => {
         tickBoxWidget.render(neonPainter, {
             x: 220,
             y: 10,
-            width: 30,
-            height: 30
+            width: 50,
+            height: 50
         });
         neonPainter.fillStyle = "black";
         var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";

@@ -25,7 +25,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
         if (this.ticked) {
-            painter.drawImage(neonImage("https://codelikecraze.github.io/neon/textures/Tickbox.png"),options.x+options.width/2, options.y+options.height/2, options.width/2, options.height/2);
+            painter.drawImage(neonImage("https://codelikecraze.github.io/neon/textures/Tickbox.png"),options.x+options.width/4, options.y+options.height/4, options.width/2, options.height/2);
         }
     }
     onclick() {
