@@ -30,7 +30,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
-        image = "https://codelikecraze.github.io/neon/textures/X.png";
+        var image = "https://codelikecraze.github.io/neon/textures/X.png";
         if (this.tickDisplay > 0) {
             "https://codelikecraze.github.io/neon/textures/tick.png"
         }
