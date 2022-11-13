@@ -8,7 +8,7 @@ window.NeonWidget = class {
         var optionsClone = structuredClone(options);
         optionsClone.isBeingHovered = currentlyHoveredNode == this;
         var isClicked = currentlyDraggedNode == this && neonMouseDown;
-        console.log(isClicked,currentlyDraggedNode);
+        console.log(currentlyDraggedNode == this, neonMouseDown,isClicked,currentlyDraggedNode);
         if (isClicked != this.previouslyClicked) {
             isClicked = this.previouslyClicked;
             if (isClicked) {
@@ -21,7 +21,7 @@ window.NeonWidget = class {
                 }   
             }
         }
-        optionsClone.isBeingDragged = isClicked;
+        optionsClone.isBeingDragged = currentlyDraggedNode == this && neonMouseDown;
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
