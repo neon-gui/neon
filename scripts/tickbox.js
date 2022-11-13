@@ -1,6 +1,7 @@
 window.NeonTickboxWidget = class extends NeonWidget {
     lightness = 1;
     clock = new Clock();
+    ticked = false;
     render_internal(painter, options) {
         this.clock.tick();
         var targetLightness = 1;
@@ -23,9 +24,12 @@ window.NeonTickboxWidget = class extends NeonWidget {
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
-        painter.drawImage(neonImage("https://codelikecraze.github.io/neon/textures/Tickbox.png"),options.x, options.y, options.width, options.height)
+        if (this.ticked) {
+            painter.drawImage(neonImage("https://codelikecraze.github.io/neon/textures/Tickbox.png"),options.x+options.width/2, options.y+options.height/2, options.width/2, options.height/2);
+        }
     }
     onclick() {
         this.lightness = 8;
+        this.ticked = !this.ticked;
     }
 }
