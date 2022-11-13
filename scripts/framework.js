@@ -106,7 +106,19 @@ xpkg.onloads.push(() => {
             x: 10,
             y: 10,
             width: 300,
-            height: 50
+            height: 300
+        });
+        buttonWidget.render(neonPainter, {
+            x: 320,
+            y: 10,
+            width: 300,
+            height: 300
+        });
+        buttonWidget.render(neonPainter, {
+            x: 630,
+            y: 10,
+            width: 300,
+            height: 300
         });
         neonPainter.fillStyle = "black";
         var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
