@@ -9,8 +9,8 @@ window.NeonWidget = class {
         optionsClone.isBeingHovered = this == currentlyHoveredNode;
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
-            isClicked = this.previouslyClicked;
             console.log(isClicked, this.previouslyClicked);
+            isClicked = this.previouslyClicked;
             if (isClicked) {
                 if (!!this.onclick) {
                     this.onclick();
