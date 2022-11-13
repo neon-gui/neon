@@ -32,7 +32,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
         painter.fill();
         var image = "https://codelikecraze.github.io/neon/textures/X.png";
         if (this.tickDisplay > 0) {
-            "https://codelikecraze.github.io/neon/textures/tick.png"
+            image = "https://codelikecraze.github.io/neon/textures/tick.png";
         }
         var tickSize = options.width/2*this.tickDisplay;
         painter.drawImage(neonImage(image),options.x+options.width/2-tickSize/2, options.y+options.height/2-tickSize/2, tickSize, tickSize);
