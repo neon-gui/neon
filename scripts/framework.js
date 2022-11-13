@@ -59,7 +59,7 @@ window.NeonButtonWidget = class extends NeonWidget {
         if (options.isBeingHovered) {
             targetLetterSpacing = 10;
         }
-        this.letterSpacing = Math.lerp(this.letterSpacing, targetLetterSpacing, this.clock.deltaTime*5);
+        this.letterSpacing = Math.lerp(this.letterSpacing, targetLetterSpacing, this.clock.deltaTime*25);
         options.addEventAbsorber({
             x:options.x,
             y:options.y,
