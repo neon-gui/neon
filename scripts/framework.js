@@ -159,6 +159,7 @@ neonContainer.paint = () => {
         width: neonPainter.canvas.width,
         height: neonPainter.canvas.height
     });
+    neonPainter.scale(2,2);
     neonPainter.translate(100,100);
     buttonWidget.render(neonPainter, {
         x: 10,
@@ -168,6 +169,7 @@ neonContainer.paint = () => {
     });
     neonPainter.fillStyle = "black";
     var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
+    neonPainter.resetTransform();
     neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
     currentlyHoveredNode = null;
     for (var i in neonAbsorbers) {
