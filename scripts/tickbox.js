@@ -17,7 +17,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
         if (this.ticked) {
             targetTickProgress = 1;
         }
-        this.tickDisplay = Math.lerp(this.tickDisplay, targetTickProgress, this.clock.deltaTime*15);
+        this.tickDisplay = Math.lerp(this.tickDisplay, targetTickProgress, this.clock.deltaTime*5);
         options.addEventAbsorber({
             x:options.x,
             y:options.y,
