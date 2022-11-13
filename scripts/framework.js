@@ -59,6 +59,9 @@ window.NeonButtonWidget = class extends NeonWidget {
         if (options.isBeingHovered) {
             targetLetterSpacing = 10;
         }
+        if (options.isBeingDragged) {
+            targetLetterSpacing = 2;
+        }
         this.letterSpacing = Math.lerp(this.letterSpacing, targetLetterSpacing, this.clock.deltaTime*15);
         options.addEventAbsorber({
             x:options.x,
@@ -89,7 +92,7 @@ window.Clock = class {
     #lastTime;
     #internalDeltaTime;
     get deltaTime() {
-        return this.#internalDeltaTime;
+        return Math.min(this.#internalDeltaTime,0.1);
     }
     tick() {
         var currentTime = this.preciseTime();
