@@ -7,6 +7,9 @@ window.BadAppleWidget = class extends NeonWidget {
             this.playButton = new NeonButtonWidget();
             this.isSetup = true;
             this.playButton.text = "Play";
+            this.playButton.onclick = () => {
+                this.badApple.play();
+            }
             var badAppleUrl = "https://guidipolito.github.io/Bad_apple_JS/Badapplesmall.mp4";
             this.badApple = document.createElement("video");
             this.badApple.src = badAppleUrl;
