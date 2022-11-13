@@ -23,6 +23,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
+        painter.drawImage(neonImage("https://codelikecraze.github.io/neon/textures/Tickbox.png"),options.x, options.y, options.width, options.height)
     }
     onclick() {
         this.lightness = 8;
