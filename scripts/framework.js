@@ -109,7 +109,7 @@ xpkg.onloads.push(() => {
             width: 200,
             height: 200
         });
-        tickBoxWidget.render({
+        tickBoxWidget.render(neonPainter, {
             x: 220,
             y: 10,
             width: 30,
