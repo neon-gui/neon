@@ -2,6 +2,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
     lightness = 1;
     clock = new Clock();
     ticked = false;
+    tickDisplay = -1;
     render_internal(painter, options) {
         this.clock.tick();
         var targetLightness = 1;
@@ -12,6 +13,11 @@ window.NeonTickboxWidget = class extends NeonWidget {
             targetLightness = 0.8;
         }
         this.lightness = Math.lerp(this.lightness, targetLightness, this.clock.deltaTime*5);
+        var targetTickProgress = -1;
+        if (this.ticked) {
+            targetTickProgress = 1;
+        }
+        this.tickDisplay = Math.lerp(this.tickDisplay, targetTickProgress, this.clock.deltaTime*5);
         options.addEventAbsorber({
             x:options.x,
             y:options.y,
@@ -24,9 +30,12 @@ window.NeonTickboxWidget = class extends NeonWidget {
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
-        if (this.ticked) {
-            painter.drawImage(neonImage("https://codelikecraze.github.io/neon/textures/Tickbox.png"),options.x+options.width/4, options.y+options.height/4, options.width/2, options.height/2);
+        image = "https://codelikecraze.github.io/neon/textures/X.png";
+        if (this.tickDisplay > 0) {
+            "https://codelikecraze.github.io/neon/textures/tick.png"
         }
+        var tickSize = options.width/2*this.tickDisplay;
+        painter.drawImage(neonImage(image),options.x+options.width/2-tickSize/2, options.y+options.height/2-tickSize/2, tickSize, tickSize);
     }
     onclick() {
         this.lightness = 8;
