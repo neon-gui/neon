@@ -56,9 +56,6 @@ window.Clock = class {
     }
 }
 
-window.neonContainer = document.createElement("canvas");
-window.bgWidget = new NeonBackgroundWidget();
-window.buttonWidget = new NeonButtonWidget();
 window.latestMouseEvent = new MouseEvent("mousemove", {
     clientX: 0,
     clientY: 0
@@ -71,6 +68,10 @@ window.onmouseup = () => {
 }
 
 xpkg.onloads.push(() => {
+    window.neonContainer = document.createElement("canvas");
+    window.bgWidget = new NeonBackgroundWidget();
+    window.buttonWidget = new NeonButtonWidget();
+    
     neonContainer.style.position = "absolute";
     neonContainer.style.left = 0;
     neonContainer.style.top = 0;
