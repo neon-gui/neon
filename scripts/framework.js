@@ -5,11 +5,7 @@ window.math = window.Math;
 window.NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
-        try {
-            var optionsClone = structuredClone(options);
-        } catch(e) {
-            console.log(options,e);
-        }
+        var optionsClone = structuredClone(filterObject(options,["addEventAbsorber"]));
         optionsClone.isBeingHovered = this == currentlyHoveredNode;
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
@@ -30,6 +26,16 @@ window.NeonWidget = class {
         }
         this.render_internal(painter, optionsClone);
     }
+}
+
+function filterObject(object,fields) {
+    var output = {};
+    for (var i in object) {
+        if (!fields.includes(i)) {
+            output[i] = object[i];
+        }
+    }
+    return output;
 }
 
 window.Clock = class {
