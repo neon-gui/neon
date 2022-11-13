@@ -68,7 +68,7 @@ window.NeonButtonWidget = class extends NeonWidget {
             transform:painter.getTransform(),
             node:this
         });
-        painter.letterSpacing = this.letterSpacing;
+        painter.letterSpacing = this.letterSpacing + "px";
         painter.fillStyle = `rgb(${32*this.lightness},${128*this.lightness},${255*this.lightness})`;
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
