@@ -10,7 +10,7 @@ window.NeonWidget = class {
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
             isClicked = this.previouslyClicked;
-            console.log(isClicked);
+            console.log(isClicked, this.previouslyClicked);
             if (isClicked) {
                 if (!!this.onclick) {
                     this.onclick();
