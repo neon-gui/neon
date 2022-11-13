@@ -5,7 +5,11 @@ window.math = window.Math;
 window.NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
-        var optionsClone = structuredClone(options);
+        try {
+            var optionsClone = structuredClone(options);
+        } catch {
+            console.log(options);
+        }
         optionsClone.isBeingHovered = this == currentlyHoveredNode;
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
