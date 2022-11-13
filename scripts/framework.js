@@ -152,12 +152,14 @@ neonContainer.paint = () => {
     neonContainer.width = innerWidth;
     neonContainer.height = innerHeight;
     window.neonPainter = neonContainer.getContext("2d");
+    neonPainter.resetTransform();
     bgWidget.render(neonPainter, {
         x: 0,
         y: 0,
         width: neonPainter.canvas.width,
         height: neonPainter.canvas.height
     });
+    neonPainter.transform(100,100);
     buttonWidget.render(neonPainter, {
         x: 10,
         y: 10,
