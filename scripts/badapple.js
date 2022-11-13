@@ -1,4 +1,4 @@
-class BadAppleWidget extends NeonWidget {
+window.BadAppleWidget = class extends NeonWidget {
     playButton = new NeonButton();
     isSetup = false;
     
