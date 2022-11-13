@@ -7,8 +7,8 @@ window.NeonWidget = class {
     render(painter, options) {
         try {
             var optionsClone = structuredClone(options);
-        } catch {
-            console.log(options);
+        } catch(e) {
+            console.log(options,e);
         }
         optionsClone.isBeingHovered = this == currentlyHoveredNode;
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
