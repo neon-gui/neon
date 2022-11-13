@@ -43,6 +43,7 @@ window.NeonBackgroundWidget = class extends NeonWidget {
 window.NeonButtonWidget = class extends NeonWidget {
     lightness = 1;
     clock = new Clock();
+    text = "button";
     render_internal(painter, options) {
         this.clock.tick();
         var targetLightness = 1;
@@ -69,10 +70,11 @@ window.NeonButtonWidget = class extends NeonWidget {
         painter.textAlign = "center";
         painter.font = "20px Comfortaa";
         painter.fillStyle = `rgb(${255*this.lightness},${255*this.lightness},${255*this.lightness})`;
-        painter.fillText("button",options.x+options.width/2, options.y+options.height/2);
+        painter.fillText(this.text,options.x+options.width/2, options.y+options.height/2);
     }
     onclick() {
-        alert("yeehaw!");
+        this.lightness = 8;
+        this.text = "clicked";
     }
 }
 
