@@ -71,6 +71,7 @@ xpkg.onloads.push(() => {
     window.neonContainer = document.createElement("canvas");
     window.bgWidget = new NeonBackgroundWidget();
     window.buttonWidget = new NeonButtonWidget();
+    window.tickBoxWidget = new NeonTickboxWidget();
 
     neonContainer.style.position = "absolute";
     neonContainer.style.left = 0;
@@ -105,20 +106,14 @@ xpkg.onloads.push(() => {
         buttonWidget.render(neonPainter, {
             x: 10,
             y: 10,
-            width: 300,
-            height: 300
+            width: 200,
+            height: 200
         });
-        buttonWidget.render(neonPainter, {
-            x: 320,
+        tickBoxWidget.render({
+            x: 220,
             y: 10,
-            width: 300,
-            height: 300
-        });
-        buttonWidget.render(neonPainter, {
-            x: 630,
-            y: 10,
-            width: 300,
-            height: 300
+            width: 30,
+            height: 30
         });
         neonPainter.fillStyle = "black";
         var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";

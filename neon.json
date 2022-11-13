@@ -27,6 +27,10 @@
         {
           "repository": "https://codelikecraze.github.io/neon/neon.json",
           "packageName": "neon@button"
+        },
+        {
+          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "packageName": "neon@tickbox"
         }
       ],
       "src": "https://codelikecraze.github.io/neon/scripts/components.js"
@@ -38,6 +42,10 @@
     "button": {
       "dependencies": [],
       "src": "https://codelikecraze.github.io/neon/scripts/button.js"
+    },
+    "tickbox": {
+      "dependencies": [],
+      "src": "https://codelikecraze.github.io/neon/scripts/tickbox.js"
     }
   }
 }
