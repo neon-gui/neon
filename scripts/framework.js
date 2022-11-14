@@ -108,7 +108,7 @@ xpkg.onloads.push(() => {
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
-        badApple.render(painter, {
+        badApple.render(neonPainter, {
             x: 0,
             y: 0,
             width: neonPainter.canvas.width,
