@@ -108,11 +108,25 @@ xpkg.onloads.push(() => {
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
-        badApple.render(neonPainter, {
-            x: 0,
-            y: 0,
-            width: neonPainter.canvas.width,
-            height: neonPainter.canvas.height
+        neonPainter.clipRect = function (x,y,w,h,callback) {
+            var newRenderer = document.createElement("canvas");
+            newRenderer.width = this.width;
+            newRenderer.height = this.height;
+            callback(newRenderer.getContext("2d"));
+            this.save();
+            this.beginPath();
+            this.rect(x,y,w,h);
+            this.clip();
+            this.drawImage(newRenderer,x,y,w,h);
+            this.restore();
+        }
+        neonPainter.clipRect(50,50,100,100,(painter)=>{
+            badApple.render(painter, {
+                x: 0,
+                y: 0,
+                width: neonPainter.canvas.width,
+                height: neonPainter.canvas.height
+            });
         });
         /*
         bgWidget.render(neonPainter, {
