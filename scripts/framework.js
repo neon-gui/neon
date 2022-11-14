@@ -5,7 +5,7 @@ window.math = window.Math;
 window.NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
-        var optionsClone = structuredClone(filterObject(options,["addEventAbsorber"]));
+        var optionsClone = structuredClone(filterObject(options, ["addEventAbsorber"]));
         optionsClone.isBeingHovered = this == currentlyHoveredNode;
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
@@ -28,7 +28,7 @@ window.NeonWidget = class {
     }
 }
 
-function filterObject(object,fields) {
+function filterObject(object, fields) {
     var output = {};
     for (var i in object) {
         if (!fields.includes(i)) {
@@ -108,26 +108,11 @@ xpkg.onloads.push(() => {
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
-        neonPainter.clipRect = function (x,y,w,h,callback) {
-            console.log(this);
-            var newRenderer = document.createElement("canvas");
-            newRenderer.width = this.width;
-            newRenderer.height = this.height;
-            callback(newRenderer.getContext("2d"));
-            this.save();
-            this.beginPath();
-            this.rect(x,y,w,h);
-            this.clip();
-            this.drawImage(newRenderer,x,y,w,h);
-            this.restore();
-        }
-        neonPainter.clipRect(50,50,100,100,(painter)=>{
-            badApple.render(painter, {
-                x: 0,
-                y: 0,
-                width: neonPainter.canvas.width,
-                height: neonPainter.canvas.height
-            });
+        badApple.render(painter, {
+            x: 0,
+            y: 0,
+            width: neonPainter.canvas.width,
+            height: neonPainter.canvas.height
         });
         /*
         bgWidget.render(neonPainter, {
