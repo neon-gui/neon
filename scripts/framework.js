@@ -109,6 +109,7 @@ xpkg.onloads.push(() => {
         window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
         neonPainter.clipRect = function (x,y,w,h,callback) {
+            console.log(this);
             var newRenderer = document.createElement("canvas");
             newRenderer.width = this.width;
             newRenderer.height = this.height;
