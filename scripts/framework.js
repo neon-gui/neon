@@ -1,3 +1,6 @@
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = CanvasRenderingContext2D.prototype.rect;
+}
 window.Math.lerp = (a, b, t) => {
     return a * (1 - t) + b * t;
 }
