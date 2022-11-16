@@ -85,6 +85,7 @@ xpkg.onloads.push(() => {
     window.bgWidget = new NeonBackgroundWidget();
     window.buttonWidget = new NeonButtonWidget();
     window.tickBoxWidget = new NeonTickboxWidget();
+    window.switchWidget = new NeonSwitchWidget();
 
     neonContainer.style.position = "absolute";
     neonContainer.style.left = 0;
@@ -111,13 +112,12 @@ xpkg.onloads.push(() => {
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
-        badApple.render(neonPainter, {
+        /*badApple.render(neonPainter, {
             x: 0,
             y: 0,
             width: neonPainter.canvas.width,
             height: neonPainter.canvas.height
-        });
-        /*
+        });*/
         bgWidget.render(neonPainter, {
             x: 0,
             y: 0,
@@ -136,7 +136,12 @@ xpkg.onloads.push(() => {
             width: 50,
             height: 50
         });
-        */
+        switchWidget.render(neonPainter, {
+            x: 280,
+            y: 10,
+            width: 50,
+            height: 50
+        });
         neonPainter.fillStyle = "black";
         var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
         neonPainter.resetTransform();
