@@ -29,17 +29,17 @@ window.NeonSwitchWidget = class extends NeonWidget {
         });
         painter.fillStyle = `rgb(32,32,32)`;
         painter.beginPath();
-        painter.roundRect(options.x, options.y + (height + options.width) / 2, options.width, height,height);
+        painter.roundRect(options.x, options.y + (-height + options.width) / 2, options.width, height,height);
         painter.fill();
 
         painter.fillStyle = `rgb(32,128,255)`;
         painter.beginPath();
-        painter.roundRect(options.x, options.y + (height + options.width) / 2, Math.lerp(height,options.width,this.tickDisplay), height,height);
+        painter.roundRect(options.x, options.y + (-height + options.width) / 2, Math.lerp(height,options.width,this.tickDisplay), height,height);
         painter.fill();
 
         painter.fillStyle = `white`;
         painter.beginPath();
-        painter.roundRect(Math.lerp(options.x,options.x+options.width-height,this.tickDisplay)+height-circleSize, options.y + (circleSize + options.width) / 2, circleSize,circleSize,height);
+        painter.roundRect(Math.lerp(options.x,options.x+options.width-height,this.tickDisplay)+(height-circleSize)/2, options.y + (-circleSize + options.width) / 2, circleSize,circleSize,height);
         painter.fill();
     }
     onclick() {
