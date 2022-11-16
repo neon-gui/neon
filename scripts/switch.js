@@ -36,12 +36,6 @@ window.NeonSwitchWidget = class extends NeonWidget {
         painter.beginPath();
         painter.roundRect(options.x, options.y + (height + options.width) / 2, Math.lerp(height,options.width,this.tickDisplay), height,height);
         painter.fill();
-        var image = "https://codelikecraze.github.io/neon/textures/X.png";
-        if (this.tickDisplay > 0) {
-            image = "https://codelikecraze.github.io/neon/textures/tick.png";
-        }
-        var tickSize = options.width/2*this.tickDisplay;
-        painter.drawImage(neonImage(image),options.x+options.width/2-tickSize/2, options.y+options.height/2-tickSize/2, tickSize, tickSize);
     }
     onclick() {
         this.ticked = !this.ticked;
