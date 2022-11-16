@@ -8,12 +8,12 @@ window.NeonSwitchWidget = class extends NeonWidget {
         var height = 20;
         var circleSize = height;
         if (options.isBeingHovered) {
-            circleSize *= 0.8;
+            circleSize *= 0.64;
         }
         if (options.isBeingDragged) {
-            circleSize *= 0.8;
+            circleSize *= 0.64;
         }
-        this.circleSize = Math.lerp(this.circleSize, circleSize, this.clock.deltaTime*5);
+        this.circleSize = Math.lerp(this.circleSize, circleSize, this.clock.deltaTime*3);
         var targetTickProgress = 0;
         if (this.ticked) {
             targetTickProgress = 1;
