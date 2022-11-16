@@ -36,6 +36,11 @@ window.NeonSwitchWidget = class extends NeonWidget {
         painter.beginPath();
         painter.roundRect(options.x, options.y + (height + options.width) / 2, Math.lerp(height,options.width,this.tickDisplay), height,height);
         painter.fill();
+
+        painter.fillStyle = `white`;
+        painter.beginPath();
+        painter.roundRect(Math.lerp(options.x,options.x+options.width-height,this.tickDisplay)+height-circleSize, options.y + (circleSize + options.width) / 2, circleSize,circleSize,height);
+        painter.fill();
     }
     onclick() {
         this.ticked = !this.ticked;
