@@ -35,6 +35,10 @@
         {
           "repository": "https://codelikecraze.github.io/neon/neon.json",
           "packageName": "neon@tickbox"
+        },
+        {
+          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "packageName": "neon@switch"
         }
       ],
       "src": "https://codelikecraze.github.io/neon/scripts/components.js"
@@ -50,6 +54,10 @@
     "tickbox": {
       "dependencies": [],
       "src": "https://codelikecraze.github.io/neon/scripts/tickbox.js"
+    },
+    "switch": {
+      "dependencies": [],
+      "src": "https://codelikecraze.github.io/neon/scripts/switch.js"
     },
     "badapple": {
       "dependencies": [],
