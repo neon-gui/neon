@@ -5,7 +5,7 @@ window.NeonSwitchWidget = class extends NeonWidget {
     tickDisplay = -1;
     render_internal(painter, options) {
         this.clock.tick();
-        var height = 30;
+        var height = 20;
         var circleSize = height;
         if (options.isBeingHovered) {
             circleSize *= 0.8;
@@ -29,12 +29,12 @@ window.NeonSwitchWidget = class extends NeonWidget {
         });
         painter.fillStyle = `rgb(32,32,32)`;
         painter.beginPath();
-        painter.roundRect(options.x, options.y + (height + options.width) / 2, options.width, height,10);
+        painter.roundRect(options.x, options.y + (height + options.width) / 2, options.width, height,height);
         painter.fill();
 
         painter.fillStyle = `rgb(32,128,255)`;
         painter.beginPath();
-        painter.roundRect(options.x, options.y + (height + options.width) / 2, Math.lerp(height,options.width,this.tickDisplay), height,10);
+        painter.roundRect(options.x, options.y + (height + options.width) / 2, Math.lerp(height,options.width,this.tickDisplay), height,height);
         painter.fill();
         var image = "https://codelikecraze.github.io/neon/textures/X.png";
         if (this.tickDisplay > 0) {
