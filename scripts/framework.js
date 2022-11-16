@@ -124,6 +124,10 @@ xpkg.onloads.push(() => {
             width: neonPainter.canvas.width,
             height: neonPainter.canvas.height
         });
+        buttonWidget.text = "Back to AOS";
+        buttonWidget.onclick = () => {
+            neonPainter.remove();
+        };
         buttonWidget.render(neonPainter, {
             x: 10,
             y: 10,
