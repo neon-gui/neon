@@ -13,7 +13,7 @@ window.NeonSwitchWidget = class extends NeonWidget {
         if (options.isBeingDragged) {
             circleSize *= 0.64;
         }
-        this.circleSize = Math.lerp(this.circleSize, circleSize, this.clock.deltaTime*3);
+        this.circleSize = Math.lerp(this.circleSize, circleSize, this.clock.deltaTime*5);
         var targetTickProgress = 0;
         if (this.ticked) {
             targetTickProgress = 1;
@@ -39,7 +39,7 @@ window.NeonSwitchWidget = class extends NeonWidget {
 
         painter.fillStyle = `white`;
         painter.beginPath();
-        painter.roundRect(Math.lerp(options.x,options.x+options.width-height,this.tickDisplay)+(height-circleSize)/2, options.y + (-circleSize + options.width) / 2, circleSize,circleSize,height);
+        painter.roundRect(Math.lerp(options.x,options.x+options.width-height,this.tickDisplay)+(height-this.circleSize)/2, options.y + (-this.circleSize + options.width) / 2, this.circleSize,circleSize,height);
         painter.fill();
     }
     onclick() {
