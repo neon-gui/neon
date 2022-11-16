@@ -39,7 +39,7 @@ window.NeonSwitchWidget = class extends NeonWidget {
 
         painter.fillStyle = `white`;
         painter.beginPath();
-        painter.roundRect(Math.lerp(options.x,options.x+options.width-height,this.tickDisplay)+(height-this.circleSize)/2, options.y + (-this.circleSize + options.width) / 2, this.circleSize,circleSize,height);
+        painter.roundRect(Math.lerp(options.x,options.x+options.width-height,this.tickDisplay)+(height-this.circleSize)/2, options.y + (-this.circleSize + options.width) / 2, this.circleSize,this.circleSize,height);
         painter.fill();
     }
     onclick() {
