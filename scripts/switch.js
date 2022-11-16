@@ -27,7 +27,7 @@ window.NeonSwitchWidget = class extends NeonWidget {
             transform:painter.getTransform(),
             node:this
         });
-        painter.fillStyle = `rgb(128,128,128)`;
+        painter.fillStyle = `rgb(64,64,64)`;
         painter.beginPath();
         painter.roundRect(options.x, options.y + (-height + options.width) / 2, options.width, height,height);
         painter.fill();
