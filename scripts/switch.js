@@ -32,7 +32,7 @@ window.NeonSwitchWidget = class extends NeonWidget {
         painter.roundRect(options.x, options.y + (-height + options.width) / 2, options.width, height,height);
         painter.fill();
 
-        painter.fillStyle = `rgb(32,128,255)`;
+        painter.fillStyle = options.primaryColor.toString();
         painter.beginPath();
         painter.roundRect(options.x, options.y + (-height + options.width) / 2, Math.lerp(height,options.width,this.tickDisplay), height,height);
         painter.fill();

@@ -27,7 +27,7 @@ window.NeonTickboxWidget = class extends NeonWidget {
             node:this
         });
         var tickDisplay0to1 = (this.tickDisplay + 1) / 2;
-        painter.fillStyle = `rgb(${Math.lerp(128,32,tickDisplay0to1)*this.lightness},${Math.lerp(128,128,tickDisplay0to1)*this.lightness},${Math.lerp(128,255,tickDisplay0to1)*this.lightness})`;
+        painter.fillStyle = new NeonColor(128,128,128).lerp(options.primaryColor,tickDisplay0to1);
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
         painter.fill();
