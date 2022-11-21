@@ -1,6 +1,18 @@
 if (!CanvasRenderingContext2D.prototype.roundRect) {
     CanvasRenderingContext2D.prototype.roundRect = CanvasRenderingContext2D.prototype.rect;
 }
+
+function fork(object) {
+    if (object instanceof Number || object instanceof null || object instanceof Boolean) {
+        return object;
+    }
+    var output = object.constructor();
+    for (var i in object) {
+        output[i] = fork(object[i]);
+    }
+    return output;
+}
+
 window.Math.lerp = (a, b, t) => {
     return a * (1 - t) + b * t;
 }
@@ -27,7 +39,7 @@ window.NeonWidget = class {
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
-        this.render_internal(painter, optionsClone);
+        this.render_internal(painter, fork(options));
     }
 }
 
