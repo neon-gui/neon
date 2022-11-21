@@ -6,7 +6,7 @@ function fork(object) {
     if (object instanceof Number || object == null || object instanceof Boolean) {
         return object;
     }
-    var output = object.constructor();
+    var output = new object.constructor();
     for (var i in object) {
         output[i] = fork(object[i]);
     }
