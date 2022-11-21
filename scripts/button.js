@@ -30,6 +30,7 @@ window.NeonButtonWidget = class extends NeonWidget {
             node:this
         });
         painter.letterSpacing = this.letterSpacing + "px";
+        console.log(options.primaryColor);
         painter.fillStyle = options.primaryColor.multiply(this.lightness).toString();
         painter.beginPath();
         painter.roundRect(options.x, options.y, options.width, options.height,10);
