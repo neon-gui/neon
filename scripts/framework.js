@@ -43,7 +43,6 @@ window.NeonColor = class {
     }
 
     multiply(lightness) {
-        console.log(lightness);
         return new NeonColor(this.r*lightness, this.g*lightness, this.b*lightness);
     }
 
