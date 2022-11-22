@@ -4,7 +4,6 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
 
 function fork(object) {
     if ((typeof object == "number") || (object == null) || object == true || object == false || (object instanceof Function)) {
-        console.log(object);
         return object;
     }
     var output = new object.constructor();
@@ -40,7 +39,6 @@ window.NeonWidget = class {
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
-        console.log(optionsClone);
         this.render_internal(painter, optionsClone);
     }
 }
