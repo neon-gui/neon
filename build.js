@@ -64,8 +64,7 @@ async function build(path,dest) {
 
         if (useMarkdown) {
             fileContent = fileContent.split(markdown).join("");
-            fileContent = "<!DOCTYPE html>" + await marked.parse(fileContent);
-            dest = dest.split("md").join("html");
+            fileContent = `<!DOCTYPE html><link rel="stylesheet" href="${GITHUB_PAGES_PATH}style.css">` + await marked.parse(fileContent);
         }
 
         await fs.promises.writeFile(dest,fileContent);
