@@ -4,6 +4,7 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
 
 function fork(object) {
     if (object instanceof Number || object == null || object instanceof Boolean || object instanceof Function) {
+        console.log(object);
         return object;
     }
     var output = new object.constructor();
