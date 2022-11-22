@@ -20,7 +20,7 @@ window.math = window.Math;
 window.NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
-        var optionsClone = structuredClone(filterObject(options, ["addEventAbsorber"]));
+        var optionsClone = fork(options);
         optionsClone.isBeingHovered = this == currentlyHoveredNode;
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
@@ -39,7 +39,7 @@ window.NeonWidget = class {
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
-        this.render_internal(painter, fork(options));
+        this.render_internal(painter, optionsClone);
     }
 }
 
