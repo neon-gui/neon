@@ -18,7 +18,7 @@ if (fs.existsSync(pth.join(__dirname,"build"))) {
 // copy all files into build folder
 
 async function build(path,dest) {
-    //console.log("building " + path);
+    console.log("building " + path);
 
     // detect if path is a directory
 
@@ -63,7 +63,6 @@ async function build(path,dest) {
         if (useMarkdown) {
             fileContent = fileContent.split(markdown).join("");
             fileContent = await marked.parse(fileContent);
-            console.log(fileContent);
         }
 
         await fs.promises.writeFile(dest,fileContent);
