@@ -189,7 +189,7 @@ xpkg.onloads.push(() => {
             primaryColor:primaryColor
         });
         neonPainter.fillStyle = "black";
-        var cursor = "https://codelikecraze.github.io/neon/cursors/pointer.png";
+        var cursor = "<.>GITHUB_PAGES_PATH<.>cursors/pointer.png";
         neonPainter.resetTransform();
         neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
         currentlyHoveredNode = null;

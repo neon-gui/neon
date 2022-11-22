@@ -1,67 +1,68 @@
 {
   "name": "neon",
+  "buildflags": "@corebuild staticEval",
   "packages": {
     "desktop": {
       "dependencies": [
         {
-          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "repository": "<.>GITHUB_PAGES_PATH<.>neon.json",
           "packageName": "neon@framework"
         },
         {
-          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "repository": "<.>GITHUB_PAGES_PATH<.>neon.json",
           "packageName": "neon@components"
         },
         {
-          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "repository": "<.>GITHUB_PAGES_PATH<.>neon.json",
           "packageName": "neon@background"
         },
         {
-          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "repository": "<.>GITHUB_PAGES_PATH<.>neon.json",
           "packageName": "neon@badapple"
         }
       ],
-      "src": "https://codelikecraze.github.io/neon/scripts/desktop.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/desktop.js"
     },
     "framework": {
       "dependencies": [],
-      "src": "https://codelikecraze.github.io/neon/scripts/framework.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/framework.js"
     },
     "components": {
       "dependencies": [
         {
-          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "repository": "<.>GITHUB_PAGES_PATH<.>neon.json",
           "packageName": "neon@button"
         },
         {
-          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "repository": "<.>GITHUB_PAGES_PATH<.>neon.json",
           "packageName": "neon@tickbox"
         },
         {
-          "repository": "https://codelikecraze.github.io/neon/neon.json",
+          "repository": "<.>GITHUB_PAGES_PATH<.>neon.json",
           "packageName": "neon@switch"
         }
       ],
-      "src": "https://codelikecraze.github.io/neon/scripts/components.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/components.js"
     },
     "background": {
       "dependencies": [],
-      "src": "https://codelikecraze.github.io/neon/scripts/background.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/background.js"
     },
     "button": {
       "dependencies": [],
-      "src": "https://codelikecraze.github.io/neon/scripts/button.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/button.js"
     },
     "tickbox": {
       "dependencies": [],
-      "src": "https://codelikecraze.github.io/neon/scripts/tickbox.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/tickbox.js"
     },
     "switch": {
       "dependencies": [],
-      "src": "https://codelikecraze.github.io/neon/scripts/switch.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/switch.js"
     },
     "badapple": {
       "dependencies": [],
-      "src": "https://codelikecraze.github.io/neon/scripts/badapple.js"
+      "src": "<.>GITHUB_PAGES_PATH<.>scripts/badapple.js"
     }
   }
 }

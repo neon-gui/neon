@@ -5,6 +5,7 @@ const fse = require('fs-extra');
 var pth = require("path");
 var marked = require("marked");
 var corebuildTag = "<." + ">";
+const GITHUB_PAGES_PATH = "https://codelikecraze.github.io/neon/";
 
 // delete build folder
 
