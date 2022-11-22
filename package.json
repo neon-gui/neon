@@ -1,0 +1,25 @@
+{
+  "name": "neon",
+  "version": "1.0.0",
+  "description": "Neon is a desktop enviornment for AaronOS (also known as aOS).",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeLikeCrazE/neon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CodeLikeCrazE/neon/issues"
+  },
+  "homepage": "https://github.com/CodeLikeCrazE/neon#readme",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "node-fs-extra": "^0.8.2"
+  }
+}
