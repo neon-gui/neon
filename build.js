@@ -4,6 +4,7 @@ var fs = require("fs");
 const fse = require('fs-extra');
 var pth = require("path");
 var marked = require("marked");
+const { deleteSync } = require("node-fs-extra");
 var corebuildTag = "<." + ">";
 const GITHUB_PAGES_PATH = "https://codelikecraze.github.io/neon/";
 
@@ -63,7 +64,8 @@ async function build(path,dest) {
 
         if (useMarkdown) {
             fileContent = fileContent.split(markdown).join("");
-            fileContent = await marked.parse(fileContent);
+            fileContent = "<!DOCTYPE html>" + await marked.parse(fileContent);
+            dest = dest.split("md").join("html");
         }
 
         await fs.promises.writeFile(dest,fileContent);
