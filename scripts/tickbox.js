@@ -1,3 +1,5 @@
+//@corebuild staticEval
+
 window.NeonTickboxWidget = class extends NeonWidget {
     lightness = 1;
     clock = new Clock();
