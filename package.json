@@ -20,6 +20,7 @@
   "homepage": "https://github.com/CodeLikeCrazE/neon#readme",
   "dependencies": {
     "fs-extra": "^10.1.0",
+    "marked": "^4.2.3",
     "node-fs-extra": "^0.8.2"
   }
 }

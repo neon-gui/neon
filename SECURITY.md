@@ -1,3 +1,4 @@
+<!--@corebuild markdown-->
 # Security Policy
 
 We care about security. A lot.
