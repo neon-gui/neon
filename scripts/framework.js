@@ -39,6 +39,7 @@ window.NeonWidget = class {
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
+        console.log(optionsClone);
         this.render_internal(painter, optionsClone);
     }
 }
