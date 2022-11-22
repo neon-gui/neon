@@ -144,11 +144,12 @@ xpkg.onloads.push(() => {
     };
     neonContainer.paint = () => {
         neonAbsorbers = [];
-        neonContainer.width = innerWidth;
-        neonContainer.height = innerHeight;
+        neonContainer.width = innerWidth * 2;
+        neonContainer.height = innerHeight * 2;
         window.neonPainter = neonContainer.getContext("2d");
         var primaryColor = new NeonColor(255,64,64); // blue is 64 128 255
         neonPainter.resetTransform();
+        neonPainter.scale(2);
         /*badApple.render(neonPainter, {
             x: 0,
             y: 0,
