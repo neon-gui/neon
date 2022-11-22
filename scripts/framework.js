@@ -3,8 +3,7 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
 }
 
 function fork(object) {
-    console.log(typeof object);
-    if ((object instanceof Number) || (object == null) || (object instanceof Boolean) || (object instanceof Function)) {
+    if ((typeof object == "number") || (object == null) || object == true || object == false || (object instanceof Function)) {
         console.log(object);
         return object;
     }
