@@ -5,7 +5,7 @@ if (!CanvasRenderingContext2D.prototype.roundRect) {
 }
 
 function fork(object) {
-    if ((typeof object == "number") || (object == null) || object == true || object == false || (object instanceof Function)) {
+    if (typeof object == "number" || object == null || object == true || object == false || object instanceof Function) {
         return object;
     }
     var output = new object.constructor();
