@@ -27,7 +27,7 @@ async function build(path,dest) {
         var children = fs.readdirSync(path);
         for (var i in children) {
             var child = children[i];
-            if (child == "build") {
+            if (child == "build" || child.startsWith('.')) {
                 continue;
             }
             await build(pth.join(path,child),pth.join(dest,child));
