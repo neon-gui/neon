@@ -1,4 +1,4 @@
-//@corebuild staticEval
+// @corebuild staticEval
 
 window.NeonTickboxWidget = class extends NeonWidget {
     lightness = 1;

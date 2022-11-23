@@ -46,7 +46,7 @@ async function build(path,dest) {
         var useMarkdown = fileContent.includes(markdown);
 
         if (useStaticEval) {
-            fileContent = fileContent.split(useStaticEval).join("");
+            fileContent = fileContent.split(staticEval).join("");
             var sections = fileContent.split(corebuildTag);
 
             for (var i in sections) {

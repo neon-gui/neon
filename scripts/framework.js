@@ -1,4 +1,4 @@
-//@corebuild staticEval
+// @corebuild staticEval
 
 if (!CanvasRenderingContext2D.prototype.roundRect) {
     CanvasRenderingContext2D.prototype.roundRect = CanvasRenderingContext2D.prototype.rect;
