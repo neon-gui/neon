@@ -68,7 +68,11 @@ async function build(path,dest) {
             dest = dest.split("md").join("html");
         }
 
-        await fs.promises.writeFile(dest,fileContent);
+        if (path.includes("png")) {
+            await fs.promises.writeFile(dest,await fs.promises.readFile(path));
+        } else {
+            await fs.promises.writeFile(dest,fileContent);
+        }
     }
 }
 
