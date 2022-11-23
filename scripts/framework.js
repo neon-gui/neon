@@ -150,6 +150,7 @@ xpkg.onloads.push(() => {
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
         var primaryColor = new NeonColor(255,64,64); // blue is 64 128 255
+        primaryColor = new NeonColor(<.>Math.random()*255<.>,<.>Math.random()*255<.>,<.>Math.random()*255<.>);
         neonPainter.resetTransform();
         /*badApple.render(neonPainter, {
             x: 0,
