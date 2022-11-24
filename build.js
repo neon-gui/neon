@@ -7,7 +7,7 @@ var marked = require("marked");
 const { deleteSync } = require("node-fs-extra");
 var corebuildTag = "<." + ">";
 var OptiPng = require('optipng');
-var minify = import("minify");
+var UglifyJS = require("uglify-js");
 const GITHUB_PAGES_PATH = "https://codelikecraze.github.io/neon/";
 
 // delete build folder
@@ -23,10 +23,6 @@ if (fs.existsSync(pth.join(__dirname, "build"))) {
 
 async function build(path, dest) {
     console.log("building " + path);
-
-    if (minify instanceof Promise) {
-        minify = (await minify).minify;
-    }
 
     // detect if path is a directory
 
@@ -75,6 +71,18 @@ async function build(path, dest) {
             dest = dest.split("md").join("html");
         }
 
+        if (path.includes("js") && !path.includes("json")) {
+            var uglifyOutput = UglifyJS.minify(fileContent);
+            if (!!uglifyOutput.error) {
+                console.log("⚠ WARNING!!! UGLIFY COULD NOT MINIFY " + path);
+                console.log("⚠ ERROR: " + uglifyOutput.error);
+            }
+            if (uglifyOutput.code) {
+                uglifyOutput.code = "/*\n\tHello!\n\tThis code has been minified by uglify.js!\n\tThe original source code is available at https://github.com/codelikecraze/neon\n\tHappy Hacking!\n*/\n\n\n" + uglifyOutput.code;
+            }
+            fileContent = uglifyOutput.code || fileContent;
+        }
+
         if (path.includes("png")) {
             console.log("optimizing " + path);
             var srcStream = fs.createReadStream(path);
@@ -87,11 +95,6 @@ async function build(path, dest) {
             srcStream.pipe(imageOptimizer).pipe(destStream);
         } else {
             await fs.promises.writeFile(dest, fileContent);
-            if ((path.includes("html") || path.includes("js") || path.includes("css")) && !path.includes("json")) {
-                if (!!fileContent) {
-                    await fs.promises.writeFile(dest, await minify(dest));
-                }
-            }
         }
     }
 }

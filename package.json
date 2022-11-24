@@ -23,6 +23,7 @@
     "marked": "^4.2.3",
     "minify": "^9.1.0",
     "node-fs-extra": "^0.8.2",
-    "optipng": "^4.2.0"
+    "optipng": "^4.2.0",
+    "uglify-js": "^3.17.4"
   }
 }
