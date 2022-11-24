@@ -37,7 +37,7 @@ async function build(path, dest) {
         chalk = (await chalk).default;
     }
 
-    console.log(lengthen(chalk.black.bgBlue` Build `) + " building " + path);
+    console.log(chalk.black.bgBlue(lengthen(" BUILD ")) + " building " + path);
 
     // detect if path is a directory
 
@@ -64,7 +64,7 @@ async function build(path, dest) {
         var useMarkdown = fileContent.includes(markdown);
 
         if (path.endsWith(".ts")) {
-            console.log(lengthen(chalk.black.bgYellow` TRANSPILE `) + " Transpiling " + path + " from TypeScript")
+            console.log(chalk.black.bgYellow(lengthen(" TRANSPILE ")) + " Transpiling " + path + " from TypeScript")
             fileContent = typescript.transpile(fileContent, {
                 target: "es6"
             });
@@ -73,7 +73,7 @@ async function build(path, dest) {
         }
 
         if (path.endsWith(".coffee")) {
-            console.log(lengthen(chalk.black.bgYellow` TRANSPILE `) + " Transpiling " + path + " from Coffeescript")
+            console.log(chalk.black.bgYellow(lengthen(" TRANSPILE ")) + " Transpiling " + path + " from Coffeescript")
 
             fileContent = coffeescript.compile(fileContent, {
             });
@@ -90,7 +90,7 @@ async function build(path, dest) {
                     output += sections[i];
                 } else {
                     var content = eval(sections[i]);
-                    console.log(lengthen(chalk.black.bgMagenta` JS `) + " compiling corebuild section " + sections[i] + " :: " + content);
+                    console.log(chalk.black.bgMagenta(lengthen(" JS ")) + " compiling corebuild section " + sections[i] + " :: " + content);
                     output += content; /* corebuild will turn this <.> 1 + 1 <.> into 2*/
                 }
             }
@@ -117,13 +117,13 @@ async function build(path, dest) {
         }
 
         if (path.includes("png")) {
-            console.log(lengthen(chalk.black.bgGreen` OPTIPNG `) + " optimizing " + path);
+            console.log(chalk.black.bgGreen(lengthen(" OPTIPNG ")) + " optimizing " + path);
             var srcStream = fs.createReadStream(path);
             var destStream = fs.createWriteStream(dest);
             var imageOptimizer = new OptiPng(['-o7']);
             imageOptimizer.on('end', () => {
                 var optimized = fs.readFileSync(dest);
-                console.log(lengthen(chalk.black.bgGreen` OPTIPNG `) + ` Optimized ${path} and compressed to ${Math.round(optimized.length / fileContent.length * 100)}% of the size.`);
+                console.log(chalk.black.bgGreen(lengthen(" OPTIPNG ")) + ` Optimized ${path} and compressed to ${Math.round(optimized.length / fileContent.length * 100)}% of the size.`);
             });
             srcStream.pipe(imageOptimizer).pipe(destStream);
         } else {
@@ -134,7 +134,7 @@ async function build(path, dest) {
 
 function lengthen(str) {
     var output = str;
-    while (output.length < (chalk.black.bgYellow` TRANSPILE `).length) {
+    while (output.length < " TRANSPILE ".length) {
         output += " ";
     }
     return output;
