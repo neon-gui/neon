@@ -196,6 +196,7 @@ xpkg.onloads.push(() => {
         if (progress > 1) {
             progress = 2 - progress;
         }
+        console.log(progress);
         neonPainter.fillStyle = "black";
         //neonPainter.drawImage(dvdLogo, Math.lerp(0, innerWidth - dvdLogo.width, progress), Math.lerp(innerHeight - dvdLogo.height, progress))
         neonPainter.fillRect(Math.lerp(0, innerWidth - 100, progress), Math.lerp(innerHeight - 100, progress), 100, 100);
