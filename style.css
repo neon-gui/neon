@@ -1,7 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
 body {
-    padding : 50px;
-    font-family: 'Inter', sans-serif;
-    background : black;
-    color : white;
+    padding: 50px;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: rgb(39, 39, 39);
+    color: rgb(240, 240, 240);
+}
+
+a {
+    color: rgb(64, 128, 255);
 }

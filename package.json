@@ -21,6 +21,8 @@
   "dependencies": {
     "fs-extra": "^10.1.0",
     "marked": "^4.2.3",
-    "node-fs-extra": "^0.8.2"
+    "minify": "^9.1.0",
+    "node-fs-extra": "^0.8.2",
+    "optipng": "^4.2.0"
   }
 }

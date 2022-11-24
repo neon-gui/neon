@@ -50,22 +50,22 @@ window.NeonColor = class {
     g = 0;
     b = 0;
 
-    constructor(r,g,b) {
+    constructor(r, g, b) {
         this.r = r;
         this.g = g;
         this.b = b;
     }
 
     multiply(lightness) {
-        return new NeonColor(this.r*lightness, this.g*lightness, this.b*lightness);
+        return new NeonColor(this.r * lightness, this.g * lightness, this.b * lightness);
     }
 
     toString() {
         return `rgb(${this.r},${this.g},${this.b})`;
     }
 
-    lerp(color,t) {
-        return new NeonColor(Math.lerp(this.r,color.r,t),Math.lerp(this.g,color.g,t),Math.lerp(this.b,color.b,t));
+    lerp(color, t) {
+        return new NeonColor(Math.lerp(this.r, color.r, t), Math.lerp(this.g, color.g, t), Math.lerp(this.b, color.b, t));
     }
 }
 
@@ -149,7 +149,7 @@ xpkg.onloads.push(() => {
         neonContainer.width = innerWidth;
         neonContainer.height = innerHeight;
         window.neonPainter = neonContainer.getContext("2d");
-        var primaryColor = new NeonColor(255,64,64); // blue is 64 128 255
+        var primaryColor = new NeonColor(255, 64, 64); // blue is 64 128 255
         neonPainter.resetTransform();
         /*badApple.render(neonPainter, {
             x: 0,
@@ -162,7 +162,7 @@ xpkg.onloads.push(() => {
             y: 0,
             width: neonPainter.canvas.width,
             height: neonPainter.canvas.height,
-            primaryColor:primaryColor
+            primaryColor: primaryColor
         });
         buttonWidget.text = "<.>1 + 1<.>";
         buttonWidget.onclick = () => {
@@ -173,21 +173,21 @@ xpkg.onloads.push(() => {
             y: 10,
             width: 200,
             height: 200,
-            primaryColor:primaryColor
+            primaryColor: primaryColor
         });
         tickBoxWidget.render(neonPainter, {
             x: 220,
             y: 10,
             width: 50,
             height: 50,
-            primaryColor:primaryColor
+            primaryColor: primaryColor
         });
         switchWidget.render(neonPainter, {
             x: 280,
             y: 10,
             width: 50,
             height: 50,
-            primaryColor:primaryColor
+            primaryColor: primaryColor
         });
         neonPainter.fillStyle = "black";
         var cursor = "<.>GITHUB_PAGES_PATH<.>cursors/pointer.png";
