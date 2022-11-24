@@ -189,7 +189,7 @@ xpkg.onloads.push(() => {
             height: 50,
             primaryColor: primaryColor
         });
-        neonPainter.fillStyle = "black";
+        neonPainter.fillStyle = "white";
         neonPainter.fillRect(0, 0, innerWidth, innerHeight);
         var dvdLogo = neonImage("https://logos-download.com/wp-content/uploads/2016/07/DVD_logo.png");
         var progress = (new Date().getTime() / 1000) % 2;
