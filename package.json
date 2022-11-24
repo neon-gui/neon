@@ -20,6 +20,7 @@
   "homepage": "https://github.com/CodeLikeCrazE/neon#readme",
   "dependencies": {
     "@babel/core": "^7.20.2",
+    "chalk": "^5.1.2",
     "coffeescript": "^2.7.0",
     "fs-extra": "^10.1.0",
     "gist": "^0.2.0",

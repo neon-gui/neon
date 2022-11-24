@@ -10,6 +10,7 @@ var OptiPng = require('optipng');
 var UglifyJS = require("uglify-js");
 var typescript = require("typescript");
 var coffeescript = require("coffeescript");
+var chalk = import("chalk");
 var logs = [];
 
 console.oldLog = console.log;
@@ -32,7 +33,11 @@ if (fs.existsSync(pth.join(__dirname, "build"))) {
 // copy all files into build folder
 
 async function build(path, dest) {
-    console.log("building " + path);
+    if (chalk instanceof Promise) {
+        chalk = (await chalk).default;
+    }
+
+    console.log(lengthen(chalk.black.bgBlue` Build `) + " building " + path);
 
     // detect if path is a directory
 
@@ -59,6 +64,7 @@ async function build(path, dest) {
         var useMarkdown = fileContent.includes(markdown);
 
         if (path.endsWith(".ts")) {
+            console.log(lengthen(chalk.black.bgYellow` TRANSPILE `) + " Transpiling " + path + " from TypeScript")
             fileContent = typescript.transpile(fileContent, {
                 target: "es6"
             });
@@ -67,6 +73,8 @@ async function build(path, dest) {
         }
 
         if (path.endsWith(".coffee")) {
+            console.log(lengthen(chalk.black.bgYellow` TRANSPILE `) + " Transpiling " + path + " from Coffeescript")
+
             fileContent = coffeescript.compile(fileContent, {
             });
 
@@ -82,7 +90,7 @@ async function build(path, dest) {
                     output += sections[i];
                 } else {
                     var content = eval(sections[i]);
-                    console.log("compiling corebuild section " + sections[i] + " :: " + content);
+                    console.log(lengthen(chalk.black.bgMagenta` JS `) + " compiling corebuild section " + sections[i] + " :: " + content);
                     output += content; /* corebuild will turn this <.> 1 + 1 <.> into 2*/
                 }
             }
@@ -109,19 +117,27 @@ async function build(path, dest) {
         }
 
         if (path.includes("png")) {
-            console.log("optimizing " + path);
+            console.log(lengthen(chalk.black.bgGreen` OPTIPNG `) + " optimizing " + path);
             var srcStream = fs.createReadStream(path);
             var destStream = fs.createWriteStream(dest);
             var imageOptimizer = new OptiPng(['-o7']);
             imageOptimizer.on('end', () => {
                 var optimized = fs.readFileSync(dest);
-                console.log(`Optimized ${path} and compressed to ${Math.round(optimized.length / fileContent.length * 100)}% of the size.`);
+                console.log(lengthen(chalk.black.bgGreen` OPTIPNG `) + ` Optimized ${path} and compressed to ${Math.round(optimized.length / fileContent.length * 100)}% of the size.`);
             });
             srcStream.pipe(imageOptimizer).pipe(destStream);
         } else {
             await fs.promises.writeFile(dest, fileContent);
         }
     }
+}
+
+function lengthen(str) {
+    var output = str;
+    while (output.length < (chalk.black.bgYellow` TRANSPILE `).length) {
+        output += " ";
+    }
+    return output;
 }
 
 (async () => {
