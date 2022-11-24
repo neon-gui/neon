@@ -190,6 +190,13 @@ xpkg.onloads.push(() => {
             primaryColor: primaryColor
         });
         neonPainter.fillStyle = "black";
+        ctx.fillRect(0, 0, innerWidth, innerHeight);
+        var dvdLogo = neonImage("https://logos-download.com/wp-content/uploads/2016/07/DVD_logo.png");
+        var progress = (new Date().getTime() / 1000) % 2;
+        if (progress > 1) {
+            progress = 2 - progress;
+        }
+        ctx.drawImage(dvdLogo, Math.lerp(0, innerWidth - dvdLogo.width), Math.lerp(innerHeight - dvdLogo.height, 0))
         var cursor = "<.>GITHUB_PAGES_PATH<.>cursors/pointer.png";
         neonPainter.resetTransform();
         neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
