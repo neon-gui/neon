@@ -196,7 +196,8 @@ xpkg.onloads.push(() => {
         if (progress > 1) {
             progress = 2 - progress;
         }
-        neonPainter.drawImage(dvdLogo, Math.lerp(0, innerWidth - dvdLogo.width), Math.lerp(innerHeight - dvdLogo.height, 0))
+        neonPainter.fillStyle = "black";
+        neonPainter.drawImage(dvdLogo, Math.lerp(0, innerWidth - dvdLogo.width, progress), Math.lerp(innerHeight - dvdLogo.height, progress))
         var cursor = "<.>GITHUB_PAGES_PATH<.>cursors/pointer.png";
         neonPainter.resetTransform();
         neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
