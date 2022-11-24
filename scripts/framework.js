@@ -94,13 +94,13 @@ Clock = class {
         this.#lastTime = currentTime;
     }
     preciseTime() {
-        if (!!Temporal) {
+        if (!!window.Temporal) {
             return Temporal.Now.instant();
         }
-        if (!!performance) {
+        if (!!window.performance) {
             return performance.now();
         }
-        if (!!Date) {
+        if (!!window.Date) {
             return new Date().getTime();
         }
         throw new Error("Clock is not available in your browser.");
