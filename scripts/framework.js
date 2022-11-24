@@ -214,7 +214,6 @@ xpkg.onloads.push(() => {
     neonImage = function (src) {
         if (!neonImagePool[src]) {
             neonImagePool[src] = document.createElement("img");
-            document.body.appendChild(neonImagePool[src]);
             neonImagePool[src].src = src;
         }
         return neonImagePool[src];
