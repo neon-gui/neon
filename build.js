@@ -9,6 +9,15 @@ var corebuildTag = "<." + ">";
 var OptiPng = require('optipng');
 var UglifyJS = require("uglify-js");
 var typescript = require("typescript");
+var coffeescript = require("coffeescript");
+var logs = [];
+
+console.oldLog = console.log;
+console.log = (s) => {
+    console.oldLog(s);
+    logs.push(s);
+}
+
 const GITHUB_PAGES_PATH = "https://codelikecraze.github.io/neon/";
 
 // delete build folder
@@ -55,6 +64,13 @@ async function build(path, dest) {
             });
 
             dest = dest.split(".ts").join(".js");
+        }
+
+        if (path.endsWith(".coffee")) {
+            fileContent = coffeescript.compile(fileContent, {
+            });
+
+            dest = dest.split(".coffee").join(".js");
         }
 
         if (useStaticEval) {
@@ -108,4 +124,6 @@ async function build(path, dest) {
     }
 }
 
-build(__dirname, pth.join(__dirname, "build"));
+(async () => {
+    await build(__dirname, pth.join(__dirname, "build"));
+})();
