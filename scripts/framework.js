@@ -164,7 +164,7 @@ xpkg.onloads.push(() => {
             height: neonPainter.canvas.height,
             primaryColor: primaryColor
         });
-        buttonWidget.text = "<.>1 + 1<.>";
+        buttonWidget.text = "Back";
         buttonWidget.onclick = () => {
             neonPainter.canvas.remove();
         };
