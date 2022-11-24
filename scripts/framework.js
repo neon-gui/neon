@@ -197,7 +197,8 @@ xpkg.onloads.push(() => {
             progress = 2 - progress;
         }
         neonPainter.fillStyle = "black";
-        neonPainter.drawImage(dvdLogo, Math.lerp(0, innerWidth - dvdLogo.width, progress), Math.lerp(innerHeight - dvdLogo.height, progress))
+        //neonPainter.drawImage(dvdLogo, Math.lerp(0, innerWidth - dvdLogo.width, progress), Math.lerp(innerHeight - dvdLogo.height, progress))
+        neonPainter.fillRect(Math.lerp(0, innerWidth - 100, progress), Math.lerp(innerHeight - 100, progress), 100, 100);
         var cursor = "<.>GITHUB_PAGES_PATH<.>cursors/pointer.png";
         neonPainter.resetTransform();
         neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
