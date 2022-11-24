@@ -15,11 +15,11 @@ function fork(object) {
     return output;
 }
 
-window.Math.lerp = (a, b, t) => {
+Math.lerp = (a, b, t) => {
     return a * (1 - t) + b * t;
 }
-window.math = window.Math;
-window.NeonWidget = class {
+math = Math;
+NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
         var optionsClone = fork(options);
@@ -45,7 +45,7 @@ window.NeonWidget = class {
     }
 }
 
-window.NeonColor = class {
+NeonColor = class {
     r = 0;
     g = 0;
     b = 0;
@@ -79,7 +79,7 @@ function filterObject(object, fields) {
     return output;
 }
 
-window.Clock = class {
+Clock = class {
     #lastTime;
     #internalDeltaTime;
     get deltaTime() {
@@ -94,20 +94,20 @@ window.Clock = class {
         this.#lastTime = currentTime;
     }
     preciseTime() {
-        if (!!window.Temporal) {
+        if (!!Temporal) {
             return Temporal.Now.instant();
         }
-        if (!!window.performance) {
+        if (!!performance) {
             return performance.now();
         }
-        if (!!window.Date) {
+        if (!!Date) {
             return new Date().getTime();
         }
         throw new Error("Clock is not available in your browser.");
     }
 }
 
-window.latestMouseEvent = new MouseEvent("mousemove", {
+latestMouseEvent = new MouseEvent("mousemove", {
     clientX: 0,
     clientY: 0
 });
@@ -119,11 +119,11 @@ window.onmouseup = () => {
 }
 
 xpkg.onloads.push(() => {
-    window.neonContainer = document.createElement("canvas");
-    window.bgWidget = new NeonBackgroundWidget();
-    window.buttonWidget = new NeonButtonWidget();
-    window.tickBoxWidget = new NeonTickboxWidget();
-    window.switchWidget = new NeonSwitchWidget();
+    neonContainer = document.createElement("canvas");
+    bgWidget = new NeonBackgroundWidget();
+    buttonWidget = new NeonButtonWidget();
+    tickBoxWidget = new NeonTickboxWidget();
+    switchWidget = new NeonSwitchWidget();
 
     neonContainer.style.position = "absolute";
     neonContainer.style.left = 0;
@@ -132,13 +132,13 @@ xpkg.onloads.push(() => {
     neonContainer.style.height = "100vh";
     neonContainer.style.zIndex = 99999999;
     neonContainer.style.cursor = "none";
-    window.neonImagePool = {};
-    window.comfortaaElement = document.createElement("style");
-    window.neonAbsorbers = [];
-    window.currentlyHoveredNode = null;
-    window.currentlyDraggedNode = null;
-    window.neonMouseDown = false;
-    window.badApple = new BadAppleWidget();
+    neonImagePool = {};
+    comfortaaElement = document.createElement("style");
+    neonAbsorbers = [];
+    currentlyHoveredNode = null;
+    currentlyDraggedNode = null;
+    neonMouseDown = false;
+    badApple = new BadAppleWidget();
     comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
     document.body.appendChild(comfortaaElement);
     DOMRect.prototype.includes = function (point) {
@@ -148,7 +148,7 @@ xpkg.onloads.push(() => {
         neonAbsorbers = [];
         neonContainer.width = innerWidth;
         neonContainer.height = innerHeight;
-        window.neonPainter = neonContainer.getContext("2d");
+        neonPainter = neonContainer.getContext("2d");
         var primaryColor = new NeonColor(255, 64, 64); // blue is 64 128 255
         neonPainter.resetTransform();
         /*badApple.render(neonPainter, {
@@ -204,7 +204,7 @@ xpkg.onloads.push(() => {
             currentlyDraggedNode = currentlyHoveredNode;
         }
     }
-    window.neonImage = function (src) {
+    neonImage = function (src) {
         if (!neonImagePool[src]) {
             neonImagePool[src] = document.createElement("img");
             document.body.appendChild(neonImagePool[src]);

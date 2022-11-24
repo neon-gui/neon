@@ -8,6 +8,7 @@ const { deleteSync } = require("node-fs-extra");
 var corebuildTag = "<." + ">";
 var OptiPng = require('optipng');
 var UglifyJS = require("uglify-js");
+var typescript = require("typescript");
 const GITHUB_PAGES_PATH = "https://codelikecraze.github.io/neon/";
 
 // delete build folder
@@ -47,6 +48,14 @@ async function build(path, dest) {
 
         var useStaticEval = fileContent.includes(staticEval);
         var useMarkdown = fileContent.includes(markdown);
+
+        if (path.endsWith(".ts")) {
+            fileContent = typescript.transpile(fileContent, {
+                target: "es6"
+            });
+
+            dest = dest.split(".ts").join(".js");
+        }
 
         if (useStaticEval) {
             fileContent = fileContent.split(staticEval).join("");
