@@ -15,6 +15,12 @@ function fork(object) {
     return output;
 }
 
+function propogate(object, settings) {
+    var output = fork(object);
+    Object.assign(settings, output);
+    return output;
+}
+
 Math.lerp = (a, b, t) => {
     return a * (1 - t) + b * t;
 }
