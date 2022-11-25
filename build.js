@@ -19,7 +19,7 @@ console.log = (s) => {
     logs.push(s);
 }
 
-const GITHUB_PAGES_PATH = "localhost/";
+var GITHUB_PAGES_PATH = "localhost/";
 
 // delete build folder
 
