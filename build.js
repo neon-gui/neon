@@ -12,11 +12,12 @@ var typescript = require("typescript");
 var coffeescript = require("coffeescript");
 var chalk = import("chalk");
 var logs = [];
+var ansi = import("strip-ansi");
 
 console.oldLog = console.log;
 console.log = (s) => {
     console.oldLog(s);
-    logs.push(s);
+    logs.push(ansi.default(s));
 }
 
 var GITHUB_PAGES_PATH = "localhost/";
@@ -133,11 +134,10 @@ async function build(path, dest) {
             var srcStream = fs.createReadStream(path);
             var destStream = fs.createWriteStream(dest);
             var imageOptimizer = new OptiPng(['-o7']);
-            imageOptimizer.on('end', () => {
-                var optimized = fs.readFileSync(dest);
-                console.log(chalk.black.bgGreen(lengthen(" OPTIPNG ")) + ` Optimized ${path} and compressed to ${Math.round(optimized.length / fileContent.length * 100)}% of the size.`);
-            });
             srcStream.pipe(imageOptimizer).pipe(destStream);
+            await new Promise((resolve) => { imageOptimizer.on('end', resolve) });
+            var optimized = fs.readFileSync(dest);
+            console.log(chalk.black.bgGreen(lengthen(" OPTIPNG ")) + ` Optimized ${path} and compressed to ${Math.round(optimized.length / fileContent.length * 100)}% of the size.`);
         } else {
             await fs.promises.writeFile(dest, fileContent);
         }
@@ -153,5 +153,7 @@ function lengthen(str) {
 }
 
 (async () => {
+    ansi = await ansi;
     await build(__dirname, pth.join(__dirname, "build"));
+    await fs.promises.writeFile(pth.join(__dirname, "build", "logs.txt"), logs.join("\n"));
 })();
