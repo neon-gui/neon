@@ -42,6 +42,7 @@ async function build(path, dest) {
         var repoName = process.env.GITHUB_REPOSITORY.split("/")[1];
         var TARGET_GITHUB_PAGES_PATH = `https://${username}.github.io/${repoName}/`;
         if (GITHUB_PAGES_PATH != TARGET_GITHUB_PAGES_PATH) {
+            GITHUB_PAGES_PATH = TARGET_GITHUB_PAGES_PATH;
             console.log("We're running on GitHub Pages!");
             console.log("Let's be nice and autodetect the GITHUB_PAGES_PATH property.");
             console.log("> " + GITHUB_PAGES_PATH);
