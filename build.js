@@ -37,6 +37,10 @@ async function build(path, dest) {
         chalk = (await chalk).default;
     }
 
+    for (var i in process.env) {
+        console.log(i + ": " + process.env[i]);
+    }
+
     console.log(chalk.black.bgBlue(lengthen(" BUILD ")) + " building " + path);
 
     // detect if path is a directory

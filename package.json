@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/CodeLikeCrazE/neon#readme",
   "dependencies": {
+    "@actions/core": "^1.10.0",
     "@babel/core": "^7.20.2",
     "chalk": "^5.1.2",
     "coffeescript": "^2.7.0",
