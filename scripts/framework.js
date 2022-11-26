@@ -46,6 +46,41 @@ NeonWidget = class {
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
+        if (!painter.clipStack) {
+            painter.clipStack = [];
+        }
+        optionsClone.updateClip = () => {
+            var transform = painter.getTransform();
+            painter.restore();
+            painter.setTransform(transform);
+            for (var i in painter.clipStack) {
+                var transform = painter.clipStack[i].transform.multiply(painter.getTransform().inverse());
+                var topLeftCorner = new DOMPoint(painter.clipStack[i].clipRect.x, painter.clipStack[i].clipRect.y).matrixTransform(transform);
+                var topRightCorner = new DOMPoint(painter.clipStack[i].clipRect.x + painter.clipStack[i].clipRect.width, painter.clipStack[i].clipRect.y).matrixTransform(transform);
+                var bottomLeftCorner = new DOMPoint(painter.clipStack[i].clipRect.x, painter.clipStack[i].clipRect.y + painter.clipStack[i].clipRect.height).matrixTransform(transform);
+                var bottomRightCorner = new DOMPoint(painter.clipStack[i].clipRect.x + painter.clipStack[i].clipRect.width, painter.clipStack[i].clipRect.y + painter.clipStack[i].clipRect.height).matrixTransform(transform);
+
+                var path = new Path2D();
+                path.moveTo(topLeftCorner.x, topLeftCorner.y);
+                path.lineTo(topRightCorner.x, topRightCorner.y);
+                path.lineTo(bottomRightCorner.x, bottomRightCorner.y);
+                path.lineTo(bottomLeftCorner.x, bottomLeftCorner.y);
+                path.lineTo(topLeftCorner.x, topLeftCorner.y);
+                path.closePath();
+
+                painter.clip(path);
+            }
+        }
+        optionsClone.clip = (rect, callback) => {
+            painter.clipStack.push({
+                clipRect: rect,
+                transform: painter.getTransform()
+            });
+            optionsClone.updateClip();
+            callback();
+            painter.clipStack.pop();
+            optionsClone.updateClip();
+        }
         this.render_internal(painter, optionsClone);
     }
 }
@@ -156,6 +191,7 @@ xpkg.onloads.push(() => {
         neonPainter = neonContainer.getContext("2d");
         var primaryColor = new NeonColor(255, 64, 64); // blue is 64 128 255
         neonPainter.resetTransform();
+        neonPainter.save();
         /*badApple.render(neonPainter, {
             x: 0,
             y: 0,
