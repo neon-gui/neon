@@ -7,8 +7,8 @@ NeonButtonWidget = class extends NeonWidget {
         options.clip({
             x: options.x,
             y: options.y,
-            width: 30,
-            height: 30
+            width: 40,
+            height: 40
         }, () => {
             this.clock.tick();
             var targetLightness = 1;
