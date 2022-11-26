@@ -13,23 +13,18 @@ var coffeescript = require("coffeescript");
 var chalk = import("chalk");
 var logs = [];
 var ansi = import("strip-ansi");
+var httpServer = require("http-server");
+var ngrok = require('ngrok');
+var url = "";
+var lastRebuildTime = 0;
 
 console.oldLog = console.log;
 console.log = (s) => {
     console.oldLog(s);
-    logs.push(ansi.default(s));
+    logs.push(ansi(s));
 }
 
-var GITHUB_PAGES_PATH = "localhost/";
-
-// delete build folder
-
-if (fs.existsSync(pth.join(__dirname, "build"))) {
-    fs.rmSync(pth.join(__dirname, "build"), {
-        recursive: true,
-        force: true
-    });
-}
+var GITHUB_PAGES_PATH = "localhost:3000/";
 
 // copy all files into build folder
 
@@ -153,7 +148,44 @@ function lengthen(str) {
 }
 
 (async () => {
-    ansi = await ansi;
+    ansi = (await ansi).default;
+    if (fs.existsSync(pth.join(__dirname, "build"))) {
+        fs.rmSync(pth.join(__dirname, "build"), {
+            recursive: true,
+            force: true
+        });
+    }
     await build(__dirname, pth.join(__dirname, "build"));
     await fs.promises.writeFile(pth.join(__dirname, "build", "logs.txt"), logs.join("\n"));
+
+    if (process.argv.includes("--server")) {
+        var server = httpServer.createServer({
+            root: "build",
+        });
+        server.listen(3000);
+        fs.watch(__dirname, {
+            recursive: true,
+        }, async (type, filename) => {
+            if (lastRebuildTime > new Date().getTime() - 3000) {
+                return;
+            }
+            if (filename.includes("build")) {
+                return;
+            }
+            lastRebuildTime = new Date().getTime();
+            console.log(chalk.black.bgCyan(lengthen(" REBUILD ")) + " " + filename + " " + type);
+            if (fs.existsSync(pth.join(__dirname, "build"))) {
+                fs.rmSync(pth.join(__dirname, "build"), {
+                    recursive: true,
+                    force: true
+                });
+            }
+            await build(__dirname, pth.join(__dirname, "build"));
+            console.log(chalk.black.bgCyan(lengthen(" REBUILD ")) + " Complete");
+        });
+    }
+    if (process.argv.includes("--ngrok")) {
+        GITHUB_PAGES_PATH = await ngrok.connect(3000) + "/";
+        console.log(GITHUB_PAGES_PATH);
+    }
 })();

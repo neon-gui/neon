@@ -18,13 +18,12 @@ function fork(object) {
 function propogate(object, settings) {
     var output = fork(object);
     Object.assign(settings, output);
-    return output;
+    return output
 }
 
 Math.lerp = (a, b, t) => {
     return a * (1 - t) + b * t;
 }
-math = Math;
 NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
