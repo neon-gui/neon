@@ -184,12 +184,12 @@ xpkg.onloads.push(() => {
     DOMRect.prototype.includes = function (point) {
         return point.x > this.left && point.x < this.right && point.y > this.top && point.y < this.bottom;
     };
+    neonPainter = neonContainer.getContext("2d");
     neonPainter.save();
     neonContainer.paint = () => {
         neonAbsorbers = [];
         neonContainer.width = innerWidth;
         neonContainer.height = innerHeight;
-        neonPainter = neonContainer.getContext("2d");
         var primaryColor = new NeonColor(255, 64, 64); // blue is 64 128 255
         neonPainter.resetTransform();
         /*badApple.render(neonPainter, {
