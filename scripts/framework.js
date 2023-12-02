@@ -1,33 +1,12 @@
 // @corebuild staticEval
-
-if (!CanvasRenderingContext2D.prototype.roundRect) {
-    CanvasRenderingContext2D.prototype.roundRect = CanvasRenderingContext2D.prototype.rect;
-}
-
-function fork(object) {
-    if (typeof object == "number" || object == null || object == true || object == false || object instanceof Function) {
-        return object;
-    }
-    var output = new object.constructor();
-    for (var i in object) {
-        output[i] = fork(object[i]);
-    }
-    return output;
-}
-
-function propogate(object, settings) {
-    var output = fork(object);
-    Object.assign(settings, output);
-    return output
-}
-
-Math.lerp = (a, b, t) => {
+window.Math.lerp = (a, b, t) => {
     return a * (1 - t) + b * t;
 }
-NeonWidget = class {
+window.math = window.Math;
+window.NeonWidget = class {
     previouslyClicked = false;
     render(painter, options) {
-        var optionsClone = fork(options);
+        var optionsClone = structuredClone(options);
         optionsClone.isBeingHovered = this == currentlyHoveredNode;
         var isClicked = this == currentlyDraggedNode && neonMouseDown;
         if (isClicked != this.previouslyClicked) {
@@ -46,80 +25,11 @@ NeonWidget = class {
         optionsClone.addEventAbsorber = (absorber) => {
             neonAbsorbers.push(absorber);
         }
-        if (!painter.clipStack) {
-            painter.clipStack = [];
-        }
-        optionsClone.updateClip = () => {
-            var transform = painter.getTransform();
-            painter.restore();
-            painter.setTransform(transform);
-            for (var i in painter.clipStack) {
-                var transform = painter.clipStack[i].transform.multiply(painter.getTransform().inverse());
-                var topLeftCorner = new DOMPoint(painter.clipStack[i].clipRect.x, painter.clipStack[i].clipRect.y).matrixTransform(transform);
-                var topRightCorner = new DOMPoint(painter.clipStack[i].clipRect.x + painter.clipStack[i].clipRect.width, painter.clipStack[i].clipRect.y).matrixTransform(transform);
-                var bottomLeftCorner = new DOMPoint(painter.clipStack[i].clipRect.x, painter.clipStack[i].clipRect.y + painter.clipStack[i].clipRect.height).matrixTransform(transform);
-                var bottomRightCorner = new DOMPoint(painter.clipStack[i].clipRect.x + painter.clipStack[i].clipRect.width, painter.clipStack[i].clipRect.y + painter.clipStack[i].clipRect.height).matrixTransform(transform);
-
-                var path = new Path2D();
-                path.moveTo(topLeftCorner.x, topLeftCorner.y);
-                path.lineTo(topRightCorner.x, topRightCorner.y);
-                path.lineTo(bottomRightCorner.x, bottomRightCorner.y);
-                path.lineTo(bottomLeftCorner.x, bottomLeftCorner.y);
-                path.lineTo(topLeftCorner.x, topLeftCorner.y);
-                path.closePath();
-
-                painter.clip(path);
-            }
-        }
-        optionsClone.clip = (rect, callback) => {
-            painter.clipStack.push({
-                clipRect: rect,
-                transform: painter.getTransform()
-            });
-            optionsClone.updateClip();
-            callback();
-            painter.clipStack.pop();
-            optionsClone.updateClip();
-        }
         this.render_internal(painter, optionsClone);
     }
 }
 
-NeonColor = class {
-    r = 0;
-    g = 0;
-    b = 0;
-
-    constructor(r, g, b) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-    }
-
-    multiply(lightness) {
-        return new NeonColor(this.r * lightness, this.g * lightness, this.b * lightness);
-    }
-
-    toString() {
-        return `rgb(${this.r},${this.g},${this.b})`;
-    }
-
-    lerp(color, t) {
-        return new NeonColor(Math.lerp(this.r, color.r, t), Math.lerp(this.g, color.g, t), Math.lerp(this.b, color.b, t));
-    }
-}
-
-function filterObject(object, fields) {
-    var output = {};
-    for (var i in object) {
-        if (!fields.includes(i)) {
-            output[i] = object[i];
-        }
-    }
-    return output;
-}
-
-Clock = class {
+window.Clock = class {
     #lastTime;
     #internalDeltaTime;
     get deltaTime() {
@@ -147,7 +57,7 @@ Clock = class {
     }
 }
 
-latestMouseEvent = new MouseEvent("mousemove", {
+window.latestMouseEvent = new MouseEvent("mousemove", {
     clientX: 0,
     clientY: 0
 });
@@ -159,11 +69,10 @@ window.onmouseup = () => {
 }
 
 xpkg.onloads.push(() => {
-    neonContainer = document.createElement("canvas");
-    bgWidget = new NeonBackgroundWidget();
-    buttonWidget = new NeonButtonWidget();
-    tickBoxWidget = new NeonTickboxWidget();
-    switchWidget = new NeonSwitchWidget();
+    window.neonContainer = document.createElement("canvas");
+    window.bgWidget = new NeonBackgroundWidget();
+    window.buttonWidget = new NeonButtonWidget();
+    window.tickBoxWidget = new NeonTickboxWidget();
 
     neonContainer.style.position = "absolute";
     neonContainer.style.left = 0;
@@ -172,75 +81,51 @@ xpkg.onloads.push(() => {
     neonContainer.style.height = "100vh";
     neonContainer.style.zIndex = 99999999;
     neonContainer.style.cursor = "none";
-    neonImagePool = {};
-    comfortaaElement = document.createElement("style");
-    neonAbsorbers = [];
-    currentlyHoveredNode = null;
-    currentlyDraggedNode = null;
-    neonMouseDown = false;
-    badApple = new BadAppleWidget();
+    window.neonImagePool = {};
+    window.comfortaaElement = document.createElement("style");
+    window.neonAbsorbers = [];
+    window.currentlyHoveredNode = null;
+    window.currentlyDraggedNode = null;
+    window.neonMouseDown = false;
+    window.badApple = new BadAppleWidget();
     comfortaaElement.innerText = `@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap');`;
     document.body.appendChild(comfortaaElement);
     DOMRect.prototype.includes = function (point) {
         return point.x > this.left && point.x < this.right && point.y > this.top && point.y < this.bottom;
     };
-    neonPainter = neonContainer.getContext("2d");
-    neonPainter.save();
     neonContainer.paint = () => {
         neonAbsorbers = [];
         neonContainer.width = innerWidth;
         neonContainer.height = innerHeight;
-        var primaryColor = new NeonColor(255, 64, 64); // blue is 64 128 255
+        window.neonPainter = neonContainer.getContext("2d");
         neonPainter.resetTransform();
-        /*badApple.render(neonPainter, {
+        badApple.render(neonPainter, {
             x: 0,
             y: 0,
             width: neonPainter.canvas.width,
             height: neonPainter.canvas.height
-        });*/
+        });
+        /*
         bgWidget.render(neonPainter, {
             x: 0,
             y: 0,
             width: neonPainter.canvas.width,
-            height: neonPainter.canvas.height,
-            primaryColor: primaryColor
+            height: neonPainter.canvas.height
         });
-        buttonWidget.text = "Back";
-        buttonWidget.onclick = () => {
-            neonPainter.canvas.remove();
-        };
         buttonWidget.render(neonPainter, {
             x: 10,
             y: 10,
             width: 200,
-            height: 200,
-            primaryColor: primaryColor
+            height: 200
         });
         tickBoxWidget.render(neonPainter, {
             x: 220,
             y: 10,
             width: 50,
-            height: 50,
-            primaryColor: primaryColor
+            height: 50
         });
-        switchWidget.render(neonPainter, {
-            x: 280,
-            y: 10,
-            width: 50,
-            height: 50,
-            primaryColor: primaryColor
-        });
-        neonPainter.fillStyle = "white";
-        neonPainter.fillRect(0, 0, innerWidth, innerHeight);
-        var dvdLogo = neonImage("https://logos-download.com/wp-content/uploads/2016/07/DVD_logo.png");
-        var progress = (new Date().getTime() / 4000) % 2;
-        if (progress > 1) {
-            progress = 2 - progress;
-        }
-        console.log(progress);
-        var sizeMultiplier = 0.1;
+        */
         neonPainter.fillStyle = "black";
-        neonPainter.drawImage(dvdLogo, Math.lerp(0, innerWidth - (dvdLogo.width * sizeMultiplier), progress), Math.lerp(innerHeight - (dvdLogo.height * sizeMultiplier), 0, progress), dvdLogo.width * sizeMultiplier, dvdLogo.height * sizeMultiplier);
         var cursor = "<.>GITHUB_PAGES_PATH<.>cursors/pointer.png";
         neonPainter.resetTransform();
         neonPainter.drawImage(neonImage(cursor), latestMouseEvent.clientX, latestMouseEvent.clientY, 20, neonImage(cursor).height / neonImage(cursor).width * 20);
@@ -255,9 +140,10 @@ xpkg.onloads.push(() => {
             currentlyDraggedNode = currentlyHoveredNode;
         }
     }
-    neonImage = function (src) {
+    window.neonImage = function (src) {
         if (!neonImagePool[src]) {
             neonImagePool[src] = document.createElement("img");
+            document.body.appendChild(neonImagePool[src]);
             neonImagePool[src].src = src;
         }
         return neonImagePool[src];
