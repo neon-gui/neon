@@ -1,4 +1,26 @@
 // @corebuild staticEval
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+    CanvasRenderingContext2D.prototype.roundRect = CanvasRenderingContext2D.prototype.rect;
+}
+
+function fork(object) {
+    if (typeof object == "number" || object == null || object == true || object == false || object instanceof Function) {
+        return object;
+    }
+    var output = new object.constructor();
+    for (var i in object) {
+        output[i] = fork(object[i]);
+    }
+    return output;
+}
+
+function propogate(object, settings) {
+    var output = fork(object);
+    Object.assign(settings, output);
+    return output
+}
+
+
 window.Math.lerp = (a, b, t) => {
     return a * (1 - t) + b * t;
 }
